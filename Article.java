@@ -1,13 +1,21 @@
-import java.net.URL;
-
 public class Article
 {
     private String title;
     private String description;
     private String source;
-    private URL link;
-    private URL image;
-    private long date;
+    private String link;
+    private String image;
+    private String date;
+
+    public Article(String title, String description, String source, String link, String image, String date)
+    {
+        this.title = title;
+        this.description = description;
+        this.source = source;
+        this.link = link;
+        this.image = image;
+        this.date = date;
+    }
 
     public String getTitle()
     {
@@ -39,33 +47,45 @@ public class Article
         this.source = source;
     }
 
-    public URL getLink()
+    public String getLink()
     {
         return link;
     }
 
-    public void setLink(URL link)
+    public void setLink(String link)
     {
         this.link = link;
     }
 
-    public URL getImage()
+    public String getImage()
     {
         return image;
     }
 
-    public void setImage(URL image)
+    public void setImage(String image)
     {
         this.image = image;
     }
 
-    public long getDate()
+    public String getDate()
     {
         return date;
     }
 
-    public void setDate(long date)
+    public void setDate(String date)
     {
         this.date = date;
     }
+
+    public String toString()
+    {
+
+        return "Title: " + this.getTitle() + "\n" +
+                "Description: " + this.getDescription() + "\n" +
+                "Source: " + this.getSource() +
+                "Link: " + this.getLink() + "\n" +
+                "Image: " + this.getImage() + "\n" +
+                "Date: " + this.getDate() + "\n";
+    }
+
 }
