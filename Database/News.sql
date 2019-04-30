@@ -2,8 +2,8 @@
 -- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Hôte : localhost
--- Généré le :  mar. 16 avr. 2019 à 22:50
+-- Hôte : 127.0.0.1
+-- Généré le :  mar. 30 avr. 2019 à 11:41
 -- Version du serveur :  10.1.38-MariaDB
 -- Version de PHP :  7.3.4
 
@@ -19,42 +19,50 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `News`
+-- Base de données :  `news`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Article`
+-- Structure de la table `article`
 --
 
-CREATE TABLE `Article` (
+CREATE TABLE `article` (
   `id_Article` int(11) NOT NULL,
+  `Title` varchar(250) NOT NULL,
   `link` varchar(255) NOT NULL,
   `Description` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `date` text NOT NULL,
   `source` varchar(255) NOT NULL,
-  `category_title` varchar(250) NOT NULL
+  `category_title` varchar(250) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Category`
+-- Structure de la table `category`
 --
 
-CREATE TABLE `Category` (
+CREATE TABLE `category` (
   `title` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Déchargement des données de la table `category`
+--
+
+INSERT INTO `category` (`title`) VALUES
+('politics');
+
 -- --------------------------------------------------------
 
 --
--- Structure de la table `User`
+-- Structure de la table `user`
 --
 
-CREATE TABLE `User` (
+CREATE TABLE `user` (
   `iduser` int(11) NOT NULL,
   `login` varchar(250) NOT NULL,
   `password` varchar(250) NOT NULL,
@@ -64,10 +72,10 @@ CREATE TABLE `User` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `User_Preferences`
+-- Structure de la table `user_preferences`
 --
 
-CREATE TABLE `User_Preferences` (
+CREATE TABLE `user_preferences` (
   `iduser` int(11) NOT NULL,
   `title` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -75,10 +83,10 @@ CREATE TABLE `User_Preferences` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `WebSite`
+-- Structure de la table `website`
 --
 
-CREATE TABLE `WebSite` (
+CREATE TABLE `website` (
   `id_WebSite` int(11) NOT NULL,
   `title` varchar(250) NOT NULL,
   `link` varchar(250) NOT NULL
@@ -89,36 +97,36 @@ CREATE TABLE `WebSite` (
 --
 
 --
--- Index pour la table `Article`
+-- Index pour la table `article`
 --
-ALTER TABLE `Article`
+ALTER TABLE `article`
   ADD PRIMARY KEY (`id_Article`),
   ADD KEY `category_title` (`category_title`);
 
 --
--- Index pour la table `Category`
+-- Index pour la table `category`
 --
-ALTER TABLE `Category`
+ALTER TABLE `category`
   ADD PRIMARY KEY (`title`);
 
 --
--- Index pour la table `User`
+-- Index pour la table `user`
 --
-ALTER TABLE `User`
+ALTER TABLE `user`
   ADD PRIMARY KEY (`iduser`);
 
 --
--- Index pour la table `User_Preferences`
+-- Index pour la table `user_preferences`
 --
-ALTER TABLE `User_Preferences`
+ALTER TABLE `user_preferences`
   ADD PRIMARY KEY (`iduser`,`title`),
   ADD KEY `title` (`title`),
   ADD KEY `id` (`iduser`);
 
 --
--- Index pour la table `WebSite`
+-- Index pour la table `website`
 --
-ALTER TABLE `WebSite`
+ALTER TABLE `website`
   ADD PRIMARY KEY (`id_WebSite`);
 
 --
@@ -126,21 +134,21 @@ ALTER TABLE `WebSite`
 --
 
 --
--- AUTO_INCREMENT pour la table `Article`
+-- AUTO_INCREMENT pour la table `article`
 --
-ALTER TABLE `Article`
+ALTER TABLE `article`
   MODIFY `id_Article` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `User`
+-- AUTO_INCREMENT pour la table `user`
 --
-ALTER TABLE `User`
+ALTER TABLE `user`
   MODIFY `iduser` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `WebSite`
+-- AUTO_INCREMENT pour la table `website`
 --
-ALTER TABLE `WebSite`
+ALTER TABLE `website`
   MODIFY `id_WebSite` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -148,17 +156,17 @@ ALTER TABLE `WebSite`
 --
 
 --
--- Contraintes pour la table `Article`
+-- Contraintes pour la table `article`
 --
-ALTER TABLE `Article`
-  ADD CONSTRAINT `category_title` FOREIGN KEY (`category_title`) REFERENCES `Category` (`title`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `article`
+  ADD CONSTRAINT `category_title` FOREIGN KEY (`category_title`) REFERENCES `category` (`title`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `User_Preferences`
+-- Contraintes pour la table `user_preferences`
 --
-ALTER TABLE `User_Preferences`
-  ADD CONSTRAINT `title` FOREIGN KEY (`title`) REFERENCES `Category` (`title`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `userid` FOREIGN KEY (`iduser`) REFERENCES `User` (`iduser`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `user_preferences`
+  ADD CONSTRAINT `title` FOREIGN KEY (`title`) REFERENCES `category` (`title`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `userid` FOREIGN KEY (`iduser`) REFERENCES `user` (`iduser`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
