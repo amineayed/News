@@ -20,7 +20,10 @@ public class User  implements java.io.Serializable {
     public User() {
     }
 
-	
+   public User (Integer iduser)
+   {
+       this.iduser=iduser;
+   }
     public User(String login, String password, String mail) {
         this.login = login;
         this.password = password;

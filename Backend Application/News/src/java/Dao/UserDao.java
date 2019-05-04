@@ -7,48 +7,52 @@ package Dao;
 
 import Hiber.NewHibernateUtil;
 import entities.Category;
+import entities.User;
 import java.util.List;
-/*import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;*/
 import org.hibernate.Session;
-public class CategoryDao {
- private NewHibernateUtil helper;
+
+/**
+ *
+ * @author Firass
+ */
+public class UserDao {
+    private NewHibernateUtil helper;
  private Session session;
  
  
- public CategoryDao() {
+ public UserDao() {
  helper = new NewHibernateUtil();
  session = helper.getSessionFactory().openSession();
  }
- public void AddCategory(Category f) {
+ public void AddUser(User f) {
 
  session.beginTransaction();
  session.save(f);
  session.getTransaction().commit();
  }
- public void EditCategory(Category f) {
+ public void EditUser(User f) {
  session.beginTransaction();
  session.update(f);
  session.getTransaction().commit();
  }
- public Category FindCategory(String id) {
+ public User FindUser(String id) {
  session.beginTransaction();
- Category f=null;
- f = (Category) session.get(Category.class, id);
+ User f=null;
+ f = (User) session.get(User.class, id);
  return (f);
  }
 
- public void RemoveCategory(String id) {
+ public void RemoveUser(String id) {
  session.beginTransaction();
- Category f;
- f = FindCategory(id);
+ User f;
+ f = FindUser(id);
  session.delete(f);
  session.getTransaction().commit();
  }
 
  public List<Category> FindAll(){
 
- return session.createSQLQuery("select * from category ").list();
+ return session.createSQLQuery("select * from user ").list();
  }
 
  public void ExitSession(){
