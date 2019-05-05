@@ -30,7 +30,7 @@ public class FileReaderConfig {
         categorylist=new ArrayList<Category>();
    }
    public void addElement(Category categ){
-    categorylist.add(categ);
+    this.categorylist.add(categ);
        }
    
    public void populatingCateg() throws FileNotFoundException, IOException{
@@ -39,10 +39,13 @@ public class FileReaderConfig {
    BufferedReader BR=new BufferedReader(file);
    CategoryDao categdao=new CategoryDao();
 List<Category> categdb=categdao.FindAll();
+categdao.ExitSession();
+   
    while((line=BR.readLine())!=null){
-       line=line.toUpperCase();
+       
       if (!categdb.contains(line)){
-           addElement(new Category(line));
+  
+           this.categorylist.add(new Category(line.toUpperCase()));
       }
    }
     BR.close(); 

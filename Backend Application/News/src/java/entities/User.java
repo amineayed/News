@@ -71,6 +71,10 @@ public class User  implements java.io.Serializable {
     public void setCategories(Set categories) {
         this.categories = categories;
     }
+    public void addCategories(Category categ)
+    {
+        this.categories.add(categ);
+    }
 
 
 

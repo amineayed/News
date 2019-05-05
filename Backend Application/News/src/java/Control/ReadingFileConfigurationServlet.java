@@ -28,7 +28,9 @@ public class ReadingFileConfigurationServlet extends HttpServlet {
 
     
 
-
+/*
+    parms are file path and the user id
+    */
  
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -36,12 +38,16 @@ public class ReadingFileConfigurationServlet extends HttpServlet {
         
     User usr=new User(Integer.parseInt(request.getParameter("id").toString()));
         FileReaderConfig frc =new FileReaderConfig(request.getParameter("file").toString());
-     usr.setLogin(request.getParameter("login"));
+   
        frc.populatingCateg();
-        Set categlist=frc.ConvertListToSet();
-        usr.setCategories(categlist);
-       UserDao upd=new UserDao();
+        for (int i=0; i<frc.getCategorylist().size();i++)
+        {
+            usr.addCategories(frc.getCategorylist().get(i));
+        }
+        
+      UserDao upd=new UserDao();
        upd.EditUser(usr);
+       upd.ExitSession();
             response.setContentType("text/html;charset=UTF-8");
  try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -52,6 +58,8 @@ public class ReadingFileConfigurationServlet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet NewServlet at " + usr.getCategories()+ "</h1>");
+             out.println("<hr>");
+             out.println("<h1>Servlet NewServlet at " + frc.getCategorylist()+ "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
