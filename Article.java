@@ -1,5 +1,8 @@
+package entities;
 public class Article
 {
+    private Integer idArticle;
+    private Category category;
     private String title;
     private String description;
     private String source;
@@ -7,14 +10,36 @@ public class Article
     private String image;
     private String date;
 
-    public Article(String title, String description, String source, String link, String image, String date)
+    public Article(Integer idArticle, Category category, String title, String description, String source, String link, String image, String date)
     {
+        this.idArticle = idArticle;
+        this.category = category;
         this.title = title;
         this.description = description;
         this.source = source;
         this.link = link;
         this.image = image;
         this.date = date;
+    }
+
+    public Integer getIdArticle()
+    {
+        return idArticle;
+    }
+
+    public void setIdArticle(Integer idArticle)
+    {
+        this.idArticle = idArticle;
+    }
+
+    public Category getCategory()
+    {
+        return category;
+    }
+
+    public void setCategory(Category category)
+    {
+        this.category = category;
     }
 
     public String getTitle()
@@ -80,9 +105,11 @@ public class Article
     public String toString()
     {
 
-        return "Title: " + this.getTitle() + "\n" +
+        return "ID: " + this.getIdArticle() + "\n" +
+                "Category: " + this.getCategory().getTitle() + "\n" +
+                "Title: " + this.getTitle() + "\n" +
                 "Description: " + this.getDescription() + "\n" +
-                "Source: " + this.getSource() +
+                "Source: " + this.getSource() + "\n" +
                 "Link: " + this.getLink() + "\n" +
                 "Image: " + this.getImage() + "\n" +
                 "Date: " + this.getDate() + "\n";
