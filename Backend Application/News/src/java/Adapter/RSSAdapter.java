@@ -24,18 +24,181 @@ import java.util.HashMap;
 public class RSSAdapter
 {
 
+    public static ArrayList<Article> retrieveAllNews() throws IOException, SAXException, ParserConfigurationException
+    {
+        ArrayList<Article> articles = new ArrayList<>();
+        articles.addAll(retrieveWorldNews());
+        articles.addAll(retrieveTechNews());
+        articles.addAll(retrieveScienceNews());
+        articles.addAll(retrieveSportNews());
+        articles.addAll(retrieveMiddleEastNews());
+        articles.addAll(retrieveAfricaNews());
+        articles.addAll(retrieveEuropeNews());
+        articles.addAll(retrieveAmericasNews());
+        articles.addAll(retrieveAsiaNews());
+        articles.addAll(retrieveTopStoriesNews());
+        articles.addAll(retrieveBusinessNews());
+        articles.addAll(retrieveEntertainmentNews());
+
+        purgeDuplicates(articles);
+
+        return articles;
+    }
+
     //Retrieve World News RSS feeds from all sources
     public static ArrayList<Article> retrieveWorldNews() throws ParserConfigurationException, SAXException, IOException
     {
         ArrayList<Article> articles = new ArrayList<>();
-        articles.addAll(BBCAdapter("http://feeds.bbci.co.uk/news/world/rss.xml"));
-        articles.addAll(f24Adapter("https://www.france24.com/en/rss"));
-        articles.addAll(CNNAdapter("http://rss.cnn.com/rss/edition_world.rss"));
+        articles.addAll(BBCAdapter("http://feeds.bbci.co.uk/news/world/rss.xml", "world"));
+        articles.addAll(f24Adapter("https://www.france24.com/en/rss", "world"));
+        articles.addAll(CNNAdapter("http://rss.cnn.com/rss/edition_world.rss", "world"));
+
+        purgeDuplicates(articles);
+
+        return articles;
+    }
+
+    public static ArrayList<Article> retrieveTechNews() throws ParserConfigurationException, SAXException, IOException
+    {
+        ArrayList<Article> articles = new ArrayList<>();
+        articles.addAll(BBCAdapter("http://feeds.bbci.co.uk/news/technology/rss.xml", "technology"));
+        articles.addAll(f24Adapter("https://www.france24.com/en/business-tech/rss", "technology"));
+        articles.addAll(CNNAdapter("http://rss.cnn.com/rss/edition_technology.rss", "technology"));
+
+        purgeDuplicates(articles);
+
+        return articles;
+    }
+
+    public static ArrayList<Article> retrieveScienceNews() throws ParserConfigurationException, SAXException, IOException
+    {
+        ArrayList<Article> articles = new ArrayList<>(BBCAdapter("http://feeds.bbci.co.uk/news/science_and_environment/rss.xml", "science"));
+
+        purgeDuplicates(articles);
+
+        return articles;
+    }
+
+    public static ArrayList<Article> retrieveSportNews() throws ParserConfigurationException, SAXException, IOException
+    {
+        ArrayList<Article> articles = new ArrayList<>();
+        articles.addAll(f24Adapter("https://www.france24.com/en/sport/rss", "sport"));
+        articles.addAll(CNNAdapter("http://rss.cnn.com/rss/edition_sport.rss", "sport"));
+        articles.addAll(CNNAdapter("http://rss.cnn.com/rss/edition_football.rss", "sport"));
+        articles.addAll(CNNAdapter("http://rss.cnn.com/rss/edition_golf.rss", "sport"));
+        articles.addAll(CNNAdapter("http://rss.cnn.com/rss/edition_motorsport.rss", "sport"));
+        articles.addAll(CNNAdapter("http://rss.cnn.com/rss/edition_tennis.rss", "sport"));
+
+        purgeDuplicates(articles);
+
+        return articles;
+    }
+
+    public static ArrayList<Article> retrieveMiddleEastNews() throws ParserConfigurationException, SAXException, IOException
+    {
+        ArrayList<Article> articles = new ArrayList<>();
+        articles.addAll(BBCAdapter("http://feeds.bbci.co.uk/news/world/middle_east/rss.xml", "middle_east"));
+        articles.addAll(f24Adapter("https://www.france24.com/en/middle-east/rss", "middle_east"));
+        articles.addAll(CNNAdapter("http://rss.cnn.com/rss/edition_meast.rss", "middle_east"));
+
+        purgeDuplicates(articles);
+
+        return articles;
+    }
+
+    public static ArrayList<Article> retrieveAfricaNews() throws ParserConfigurationException, SAXException, IOException
+    {
+        ArrayList<Article> articles = new ArrayList<>();
+        articles.addAll(BBCAdapter("http://feeds.bbci.co.uk/news/world/africa/rss.xml", "africa"));
+        articles.addAll(f24Adapter("https://www.france24.com/en/africa/rss", "africa"));
+        articles.addAll(CNNAdapter("http://rss.cnn.com/rss/edition_africa.rss", "africa"));
+
+        purgeDuplicates(articles);
+
+        return articles;
+    }
+
+    public static ArrayList<Article> retrieveEuropeNews() throws ParserConfigurationException, SAXException, IOException
+    {
+        ArrayList<Article> articles = new ArrayList<>();
+        articles.addAll(BBCAdapter("http://feeds.bbci.co.uk/news/world/europe/rss.xml", "europe"));
+        articles.addAll(BBCAdapter("http://feeds.bbci.co.uk/news/england/rss.xml", "europe"));
+        articles.addAll(BBCAdapter("http://feeds.bbci.co.uk/news/northern_ireland/rss.xml", "europe"));
+        articles.addAll(BBCAdapter("http://feeds.bbci.co.uk/news/scotland/rss.xml", "europe"));
+        articles.addAll(BBCAdapter("http://feeds.bbci.co.uk/news/england/rss.xml", "europe"));
+        articles.addAll(f24Adapter("https://www.france24.com/en/europe/rss", "europe"));
+        articles.addAll(f24Adapter("https://www.france24.com/en/france/rss", "europe"));
+        articles.addAll(CNNAdapter("http://feeds.bbci.co.uk/news/wales/rss.xml", "europe"));
+
+        purgeDuplicates(articles);
+
+        return articles;
+    }
+
+    public static ArrayList<Article> retrieveAmericasNews() throws ParserConfigurationException, SAXException, IOException
+    {
+        ArrayList<Article> articles = new ArrayList<>();
+        articles.addAll(BBCAdapter("http://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml", "americas"));
+        articles.addAll(BBCAdapter("http://feeds.bbci.co.uk/news/world/latin_america/rss.xml", "americas"));
+        articles.addAll(f24Adapter("https://www.france24.com/en/americas/rss", "americas"));
+        articles.addAll(CNNAdapter("http://rss.cnn.com/rss/edition_us.rss", "americas"));
+        articles.addAll(CNNAdapter("http://rss.cnn.com/rss/edition_americas.rss", "americas"));
+
+        purgeDuplicates(articles);
+
+        return articles;
+    }
+
+    public static ArrayList<Article> retrieveAsiaNews() throws ParserConfigurationException, SAXException, IOException
+    {
+        ArrayList<Article> articles = new ArrayList<>();
+        articles.addAll(BBCAdapter("http://feeds.bbci.co.uk/news/world/asia/rss.xml", "asia"));
+        articles.addAll(f24Adapter("https://www.france24.com/en/asia-pacific/rss", "asia"));
+        articles.addAll(CNNAdapter("http://rss.cnn.com/rss/edition_asia.rss", "asia"));
+
+        purgeDuplicates(articles);
+
+        return articles;
+    }
+
+    public static ArrayList<Article> retrieveTopStoriesNews() throws ParserConfigurationException, SAXException, IOException
+    {
+        ArrayList<Article> articles = new ArrayList<>();
+        articles.addAll(BBCAdapter("http://feeds.bbci.co.uk/news/rss.xml", "top_stories"));
+        articles.addAll(BBCAdapter("http://feeds.bbci.co.uk/news/video_and_audio/news_front_page/rss.xml?edition=uk", "top_stories"));
+        articles.addAll(CNNAdapter("http://rss.cnn.com/rss/edition.rss", "top_stories"));
+
+        purgeDuplicates(articles);
+
+        return articles;
+    }
+
+    public static ArrayList<Article> retrieveBusinessNews() throws ParserConfigurationException, SAXException, IOException
+    {
+        ArrayList<Article> articles = new ArrayList<>();
+        articles.addAll(BBCAdapter("http://feeds.bbci.co.uk/news/business/rss.xml", "business"));
+        articles.addAll(BBCAdapter("http://feeds.bbci.co.uk/news/video_and_audio/business/rss.xml", "business"));
+        articles.addAll(CNNAdapter("http://rss.cnn.com/rss/money_news_international.rss", "business"));
+
+        purgeDuplicates(articles);
+
+        return articles;
+    }
+
+    public static ArrayList<Article> retrieveEntertainmentNews() throws ParserConfigurationException, SAXException, IOException
+    {
+        ArrayList<Article> articles = new ArrayList<>();
+        articles.addAll(BBCAdapter("http://feeds.bbci.co.uk/news/entertainment_and_arts/rss.xml", "entertainment"));
+        articles.addAll(BBCAdapter("http://feeds.bbci.co.uk/news/video_and_audio/entertainment_and_arts/rss.xml", "entertainment"));
+        articles.addAll(CNNAdapter("http://rss.cnn.com/rss/edition_entertainment.rss", "entertainment"));
+
+        purgeDuplicates(articles);
+
         return articles;
     }
 
     //Produce an ArrayList<Article> from a given BBC RSS feed URL
-    public static ArrayList<Article> BBCAdapter(String rssLink) throws IOException, ParserConfigurationException, SAXException
+    public static ArrayList<Article> BBCAdapter(String rssLink, String category) throws IOException, ParserConfigurationException, SAXException
     {
         ArrayList<Article> articles = new ArrayList<>();
 
@@ -64,23 +227,26 @@ public class RSSAdapter
         linkList.remove(0);
         linkList.remove(0);
 
-        ArrayList<String> imageList = getBBCImageURLs(docToString(doc));
-        Article ArticleEntityObject=new Article();
+        ArrayList<String> imageList = getBBCImageURLs(xml);
+
         for(int i = 0; i < dateList.size(); i++)
-        { ArticleEntityObject.setTitle(titleList.get(i));
-            ArticleEntityObject.setDescription(descList.get(i));
-            ArticleEntityObject.setSource("BBC");
-            ArticleEntityObject.setLink(linkList.get(i));
-            ArticleEntityObject.setImage(imageList.get(i));
-            ArticleEntityObject.setDate(dateList.get(i));
-            ArticleEntityObject.setCategory(new Category("politics"));
-            articles.add(ArticleEntityObject);
+        {
+            articles.add(new Article(
+                    titleList.get(i).hashCode(),
+                    new Category(category),
+                    titleList.get(i),
+                    descList.get(i),
+                    "BBC",
+                    linkList.get(i),
+                    imageList.get(i),
+                    dateList.get(i)
+            ));
         }
 
         return articles;
     }
     //Produce an ArrayList<Article> from a given f24 RSS feed URL
-    public static ArrayList<Article> f24Adapter(String rssLink) throws IOException, ParserConfigurationException, SAXException
+    public static ArrayList<Article> f24Adapter(String rssLink, String category) throws IOException, ParserConfigurationException, SAXException
     {
         ArrayList<Article> articles = new ArrayList<>();
 
@@ -104,27 +270,31 @@ public class RSSAdapter
         NodeList linkNodeList = doc.getElementsByTagName("link");
         ArrayList<String> linkList = nodeToArray(linkNodeList);
 
-        ArrayList<String> imageList = getF24ImageURLs(docToString(doc));
+        ArrayList<String> imageList = getF24ImageURLs(xml);
 
-        Article ArticleEntityObject=new Article();
+
         for(int i = 0; i < dateList.size(); i++)
-        {ArticleEntityObject.setTitle(titleList.get(i));
-            ArticleEntityObject.setDescription(descList.get(i));
-            ArticleEntityObject.setSource("France 24");
-            ArticleEntityObject.setLink(linkList.get(i));
-            ArticleEntityObject.setImage(imageList.get(i));
-            ArticleEntityObject.setDate(dateList.get(i));
-            ArticleEntityObject.setCategory(new Category("politics"));
-            articles.add(ArticleEntityObject);
-
+        {
+            articles.add(new Article(
+                    titleList.get(i).hashCode(),
+                    new Category(category),
+                    titleList.get(i),
+                    descList.get(i),
+                    "France 24",
+                    linkList.get(i),
+                    imageList.get(i),
+                    dateList.get(i)
+            ));
         }
 
         return articles;
     }
     //Produce an ArrayList<Article> from a given CNN RSS feed URL
-    public static ArrayList<Article> CNNAdapter(String rssLink) throws IOException, ParserConfigurationException, SAXException
+    public static ArrayList<Article> CNNAdapter(String rssLink, String category) throws IOException, ParserConfigurationException, SAXException
     {
         ArrayList<Article> articles = new ArrayList<>();
+
+        ArrayList<Integer> articleIds = new ArrayList<>();
 
         //Build XML Document
         String xml = (readFromWeb(rssLink));
@@ -162,67 +332,89 @@ public class RSSAdapter
         NodeList itemNodeList = doc.getElementsByTagName("item");
         HashMap<Integer, String[]> articleMap = new HashMap<>();
 
+        int descErrorIndex;
+
         int nextKey = 0;
         for(int i = 0; i < itemNodeList.getLength(); i++)
         {
             //Full, title, description, link, image, date
             articleMap.put(nextKey++, new String[]{itemList.get(i), "NO_TITLE", "NO_DESCRIPTION", "NO_LINK", "NO_IMAGE", "NO_DATE"});
-            for(int j = 0; j < titleList.size(); j++)
+            for (String s : titleList)
             {
-                if(itemNodeList.item(i).getTextContent().contains(titleList.get(j)))
+                if (s.hashCode() == 0)
+                    continue;
+                if (itemNodeList.item(i).getTextContent().contains(s))
                 {
-                    articleMap.get(i)[1] = titleList.get(j);
+                    articleMap.get(i)[1] = s;
                     break;
                 }
             }
-            for(int j = 0; j < descList.size(); j++)
+            for (String s : descList)
             {
-                if(itemNodeList.item(i).getTextContent().contains(descList.get(j)))
+                if (itemNodeList.item(i).getTextContent().contains(s))
                 {
-                    articleMap.get(i)[2] = descList.get(j);
+                    articleMap.get(i)[2] = s;
                     break;
                 }
             }
-            for(int j = 0; j < linkList.size(); j++)
+            for (String s : linkList)
             {
-                if(itemNodeList.item(i).getTextContent().contains(linkList.get(j)))
+                if (itemNodeList.item(i).getTextContent().contains(s))
                 {
-                    articleMap.get(i)[3] = linkList.get(j);
+                    articleMap.get(i)[3] = s;
                 }
             }
-            for(int j = 0; j < imageList.size(); j++)
+            for (String s : imageList)
             {
-                if(itemList.get(i).contains(imageList.get(j)))
+                if (itemList.get(i).contains(s))
                 {
-                    articleMap.get(i)[4] = imageList.get(j);
+                    articleMap.get(i)[4] = s;
                 }
             }
-            for(int j = 0; j < dateList.size(); j++)
+            for (String s : dateList)
             {
-                if(itemNodeList.item(i).getTextContent().contains(dateList.get(j)))
+                if (s.hashCode() == 0)
+                    continue;
+                if (itemNodeList.item(i).getTextContent().contains(s))
                 {
-                    articleMap.get(i)[5] = dateList.get(j);
+                    articleMap.get(i)[5] = s;
                 }
             }
         }
-        Article ArticleEntityObject=new Article();
-        for(int i = 0; i < dateList.size(); i++)
+
+        for(int i = 0; i < articleMap.size(); i++)
         {
-            ArticleEntityObject.setTitle(titleList.get(i));
-            ArticleEntityObject.setDescription(descList.get(i));
-            ArticleEntityObject.setSource("France 24");
-            ArticleEntityObject.setLink(linkList.get(i));
-            ArticleEntityObject.setImage(imageList.get(i));
-            ArticleEntityObject.setDate(dateList.get(i));
-            ArticleEntityObject.setCategory(new Category("politics"));
-            articles.add(ArticleEntityObject);
+            //Check for whitespace title
+            if(articleMap.get(i)[1].hashCode() == 0)
+                continue;
+            //Check for duplicates
+            if(articleIds.contains(articleMap.get(i)[1].hashCode()))
+                continue;
+            //Check for malformed description
+            articleIds.add(articleMap.get(i)[1].hashCode());
+            descErrorIndex = articleMap.get(i)[2].indexOf("<img src");
+            if(descErrorIndex == 0)
+                articleMap.get(i)[2] = "NO_DESCRIPTION";
+            else if(descErrorIndex > 0)
+                articleMap.get(i)[2] = articleMap.get(i)[2].substring(0, descErrorIndex);
+            //Add article
+            articles.add(new Article(
+                    articleMap.get(i)[1].hashCode(),
+                    new Category(category),
+                    articleMap.get(i)[1],
+                    articleMap.get(i)[2],
+                    "CNN",
+                    articleMap.get(i)[3],
+                    articleMap.get(i)[4],
+                    articleMap.get(i)[5]
+            ));
         }
 
         return articles;
     }
 
     //Used to extract the image URLs from BBC feeds
-    public static ArrayList<String> getBBCImageURLs(String doc)
+    private static ArrayList<String> getBBCImageURLs(String doc)
     {
         StringBuilder imageUrl;
         char nextChar;
@@ -246,7 +438,7 @@ public class RSSAdapter
         return imageUrls;
     }
     //Used to extract the image URLs from f24 feeds
-    public static ArrayList<String> getF24ImageURLs(String doc)
+    private static ArrayList<String> getF24ImageURLs(String doc)
     {
         StringBuilder imageUrl;
         char nextChar;
@@ -270,7 +462,7 @@ public class RSSAdapter
         return imageUrls;
     }
     //Used to extract the image URLs from CNN feeds
-    public static ArrayList<String> getCNNImageURLs(String doc)
+    private static ArrayList<String> getCNNImageURLs(String doc)
     {
         doc = doc.replace(" ", "");
         doc = doc.replace("\n", "");
@@ -298,7 +490,7 @@ public class RSSAdapter
     }
 
     //Convert a NodeList into an ArrayList
-    public static ArrayList<String> nodeToArray(NodeList nodeList)
+    private static ArrayList<String> nodeToArray(NodeList nodeList)
     {
         ArrayList<String> outList = new ArrayList<>();
         for(int i = 0; i < nodeList.getLength(); i++)
@@ -308,7 +500,7 @@ public class RSSAdapter
         return outList;
     }
     //Get all of the text from between two XML tags
-    public static ArrayList<String> getFullElementsByTag(String doc, String tag)
+    private static ArrayList<String> getFullElementsByTag(String doc, String tag)
     {
         ArrayList<String> elementList = new ArrayList<>();
         StringBuilder element;
@@ -332,17 +524,29 @@ public class RSSAdapter
         return elementList;
     }
 
+    public static void purgeDuplicates(ArrayList<Article> articles)
+    {
+        ArrayList<Integer> articleIds = new ArrayList<>();
+        for(int i = 0; i < articles.size(); i++)
+        {
+            if(articleIds.contains(articles.get(i).getId()))
+                articles.remove(i--);
+            else
+                articleIds.add(articles.get(i).getId());
+        }
+    }
+
     //Forum code
     //Extract HTML from URL and convert to String
-    public static String readFromWeb(String webURL) throws IOException
+    private static String readFromWeb(String webURL) throws IOException
     {
         URL url = new URL(webURL);
-        String output = "";
+        StringBuilder output = new StringBuilder();
         InputStream is =  url.openStream();
         try( BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
             String line;
             while ((line = br.readLine()) != null) {
-                output += line;
+                output.append(line);
             }
         }
         catch (MalformedURLException e) {
@@ -353,10 +557,10 @@ public class RSSAdapter
             e.printStackTrace();
             throw new IOException();
         }
-        return output;
+        return output.toString();
     }
     //Convert a Document to a String
-    public static String docToString(Document doc)
+    private static String docToString(Document doc)
     {
         try {
             StringWriter sw = new StringWriter();

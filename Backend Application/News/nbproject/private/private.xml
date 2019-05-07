@@ -16,5 +16,13 @@
             <file>file:/C:/Users/amin%20ayed/Documents/NetBeansProjects/News/web/index.html</file>
             <file>file:/C:/Users/amin%20ayed/Documents/NetBeansProjects/News/src/java/hibernate.cfg.xml</file>
         </group>
+        <group name="Chatpers 6 - 10">
+            <file>file:/C:/Users/Alienware-PC/Documents/GitHub/News/News/Backend%20Application/News/nbproject/build-impl.xml</file>
+            <file>file:/C:/Users/Alienware-PC/Documents/GitHub/News/News/Backend%20Application/News/src/java/Adapter/RSSAdapter.java</file>
+            <file>file:/C:/Users/Alienware-PC/Documents/GitHub/News/News/Backend%20Application/News/src/java/Dao/ArticleDao.java</file>
+            <file>file:/C:/Users/Alienware-PC/Documents/GitHub/News/News/Backend%20Application/News/src/java/entities/Article.java</file>
+            <file>file:/C:/Users/Alienware-PC/Documents/GitHub/News/News/Backend%20Application/News/src/java/Dao/CategoryDao.java</file>
+            <file>file:/C:/Users/Alienware-PC/Documents/GitHub/News/News/Backend%20Application/News/src/java/Control/AddArticleServlet.java</file>
+        </group>
     </open-files>
 </project-private>

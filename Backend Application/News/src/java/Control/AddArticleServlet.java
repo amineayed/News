@@ -28,7 +28,7 @@ public class AddArticleServlet extends HttpServlet {
             throws ServletException, IOException {
            try {
                ArticleDao.CleanArticleTable();
-            ArticleDao.AddArticleAdapter(RSSAdapter.retrieveWorldNews());
+            ArticleDao.AddArticleAdapter(RSSAdapter.retrieveAllNews());
         } catch (ParserConfigurationException ex) {
             Logger.getLogger(AddArticleServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SAXException ex) {

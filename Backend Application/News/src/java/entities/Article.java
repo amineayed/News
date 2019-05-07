@@ -10,7 +10,7 @@ package entities;
 public class Article  implements java.io.Serializable {
 
 
-     private Integer idArticle;
+     private Integer id;
      private Category category;
      private String title;
      private String link;
@@ -23,30 +23,24 @@ public class Article  implements java.io.Serializable {
     }
 
 	
-    public Article(String title, String link, String description, String image, String date, String source) {
+    public Article(Integer id, Category category, String title, String description, String source, String link, String image, String date)
+    {
+        this.id = id;
+        this.category = category;
         this.title = title;
-        this.link = link;
         this.description = description;
+        this.source = source;
+        this.link = link;
         this.image = image;
         this.date = date;
-        this.source = source;
-    }
-    public Article(Category category, String title, String link, String description, String image, String date, String source) {
-       this.category = category;
-       this.title = title;
-       this.link = link;
-       this.description = description;
-       this.image = image;
-       this.date = date;
-       this.source = source;
     }
    
-    public Integer getIdArticle() {
-        return this.idArticle;
+    public Integer getId() {
+        return this.id;
     }
     
     public void setIdArticle(Integer idArticle) {
-        this.idArticle = idArticle;
+        this.id = idArticle;
     }
     public Category getCategory() {
         return this.category;
