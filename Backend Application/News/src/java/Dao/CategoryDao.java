@@ -33,7 +33,7 @@ public class CategoryDao {
  }
  public Category FindCategory(String id) {
  session.beginTransaction();
- Category f;
+ Category f=null;
  f = (Category) session.get(Category.class, id);
  return (f);
  }
@@ -48,7 +48,7 @@ public class CategoryDao {
 
  public List<Category> FindAll(){
 
- return session.createQuery("select c from category c").list();
+ return session.createSQLQuery("select * from category ").list();
  }
 
  public void ExitSession(){

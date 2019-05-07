@@ -1,32 +1,33 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 29 avr. 2019 22:52:57 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class catalog="news" name="entities.Article" optimistic-lock="version" table="article">
-    <id name="id" type="java.lang.Integer">
-      <column name="id_Article"/>
-      <generator class="identity"/>
-    </id>
-    <many-to-one class="entities.Category" fetch="select" name="category">
-      <column length="250" name="category_title"/>
-    </many-to-one>
-    <property name="title" type="string">
-      <column length="250" name="Title" not-null="true"/>
-    </property>
-    <property name="link" type="string">
-      <column name="link" not-null="true"/>
-    </property>
-    <property name="description" type="string">
-      <column name="Description" not-null="true"/>
-    </property>
-    <property name="image" type="string">
-      <column name="image" not-null="true"/>
-    </property>
-    <property name="date" type="string">
-      <column length="65535" name="date" not-null="true"/>
-    </property>
-    <property name="source" type="string">
-      <column name="source" not-null="true"/>
-    </property>
-  </class>
+    <class name="entities.Article" table="article" catalog="news" optimistic-lock="version">
+        <id name="idArticle" type="java.lang.Integer">
+            <column name="id_Article" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="category" class="entities.Category" fetch="select">
+            <column name="category_title" length="250" />
+        </many-to-one>
+        <property name="title" type="string">
+            <column name="Title" length="250" not-null="true" />
+        </property>
+        <property name="link" type="string">
+            <column name="link" not-null="true" />
+        </property>
+        <property name="description" type="string">
+            <column name="Description" not-null="true" />
+        </property>
+        <property name="image" type="string">
+            <column name="image" not-null="true" />
+        </property>
+        <property name="date" type="string">
+            <column name="date" length="65535" not-null="true" />
+        </property>
+        <property name="source" type="string">
+            <column name="source" not-null="true" />
+        </property>
+    </class>
 </hibernate-mapping>

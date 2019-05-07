@@ -8,6 +8,7 @@ package Dao;
 import Hiber.NewHibernateUtil;
 import entities.Article;
 import entities.Category;
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
 
@@ -57,7 +58,7 @@ public class ArticleDao {
  session.close();
  }
 
- public static void AddArticleAdapter(List<Article> l){
+ public static void AddArticleAdapter(ArrayList<Article> l){
      ArticleDao ad=new ArticleDao();
      for (int i=0;i<l.size();i++){
          

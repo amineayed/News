@@ -17,7 +17,6 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -529,10 +528,10 @@ public class RSSAdapter
         ArrayList<Integer> articleIds = new ArrayList<>();
         for(int i = 0; i < articles.size(); i++)
         {
-            if(articleIds.contains(articles.get(i).getId()))
+            if(articleIds.contains(articles.get(i).getIdArticle()))
                 articles.remove(i--);
             else
-                articleIds.add(articles.get(i).getId());
+                articleIds.add(articles.get(i).getIdArticle());
         }
     }
 
