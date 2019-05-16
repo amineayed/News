@@ -3,10 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/News%20Projekt/News/Backend%20Application/News/src/java/entities/User.java</file>
-            <file>file:/C:/xampp/htdocs/News%20Projekt/News/Backend%20Application/News/src/java/Control/ReadingFileConfigurationServlet.java</file>
-            <file>file:/C:/xampp/htdocs/News%20Projekt/News/Backend%20Application/News/src/java/Dao/UserDao.java</file>
-            <file>file:/C:/xampp/htdocs/News%20Projekt/News/Backend%20Application/News/src/java/FileConfiguration/FileReaderConfig.java</file>
+            <file>file:/C:/xampp/htdocs/News/Backend%20Application/News/src/java/Adapter/RSSAdapter.java</file>
+            <file>file:/C:/xampp/htdocs/News/Backend%20Application/News/src/java/Control/AddArticleServlet.java</file>
         </group>
     </open-files>
 </project-private>
