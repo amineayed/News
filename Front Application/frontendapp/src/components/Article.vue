@@ -26,7 +26,11 @@ export default {
  
       listname:["firass","ahmed","slim"]
     };
+  },
+    created : function(){
+      alert("onload method");
   }
+
 };
 </script>
 <style>
