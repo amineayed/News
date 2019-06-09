@@ -59,11 +59,10 @@ public class UserDao {
  session.close();
  }
 
- /* public static void main(String args[]){
+ public List<User> findbyMail(String mail){
+     return session.createSQLQuery("select * from user where mail like '%"+mail+"%'").list();
+ }
 
- Formation f = new Formation ("124","formation JEE"," module hibernate","03 h ");
- GererFormation agent = new GererFormation();
- agent.AddFormation(f);
- agent.ExitSession();
- }*/
+
+
 }

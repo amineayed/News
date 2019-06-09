@@ -9,6 +9,7 @@ import Hiber.NewHibernateUtil;
 import entities.Article;
 import entities.Category;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import org.hibernate.Session;
 
@@ -51,7 +52,7 @@ public class ArticleDao {
 
  public List<Article> FindAll(){
 
- return session.createQuery("select a from article a").list();
+ return session.createSQLQuery("select * from article").list();
  }
 
  public void ExitSession(){
@@ -75,5 +76,29 @@ public class ArticleDao {
      
  }
 
+     public List<Article> FindbyCategory(Category category){
+    return session.createSQLQuery("select * from article a where a.category_title like '%"+category.getTitle()+"%'").list();
+ }
+
+    public List<Article> Findbytitle(String title){
+    return session.createSQLQuery("select * from article a where a.Title like '%"+title+"%'").list();
+ }
     
+    
+     public List<Article> Findbysource(String source){
+    return session.createSQLQuery("select * from article a where a.source like '%"+source+"%'").list();
+   
+ }
+     
+       public List<Article> FindbyDescription(String description){
+    return session.createSQLQuery("select * from article a where a.Description like '%"+description+"%'").list();
+   
+ }
+       
+            public List<Article> Findbydate(String date){
+    return session.createSQLQuery("select * from article a where a.date like '%"+date+"%'").list();
+   
+ }
+            
+          
 }
