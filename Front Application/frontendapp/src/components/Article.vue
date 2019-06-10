@@ -1,35 +1,58 @@
 <template>
-<div>
+<div   style="display: table-cell;">
  
-   <div class="leftnewsbox"  v-for="NewsTitle in listname" key="NewsTitle"> 
-    
+   <div class="leftnewsbox"  v-for="News in TitleAR" > 
+              <img src="../assets/img/addbt.png" class="addbt" />
+               <img class="Arrow" src="../assets/img/arrow.png">
+              <br>
                 <img src="../assets/img/france24.png"
      
                 class="NewsImage">
-    
-              <label class="News-Title">{{ NewsTitle}}</label>
-              <p class="newsdesc">Nec sane haec sola pernicies orientem diversis cladibus adfligebat.
-                   Namque et Isauri, quibus est usitatum saepe pacari saepeque inopinis excursibus cuncta miscere,
+         
+              <p class="News-Title">{{ News.Title }}</p>
+              <p class="newsdesc">{{ News.Description }} 
+               
                  </p>
-              <a href="modal.html">
-              <img class="Arrow" src=""></a>
+         
           </div>
 </div>  
 </template>
 <script>
 import Vue from 'vue'
-
+import axios from 'axios'
+var vm=this;
 export default {
-      name:"Article",
+ name:"Article",
   data() {
     return {
- 
-      listname:["firass","ahmed","slim"]
+        TitleAR:[]
     };
   },
-    created : function(){
-      alert("onload method");
-  }
+    created(){
+ 
+        
+     axios.get("http://localhost:8080/News/articles/all").then((response)=>{
+              var articles=response.data;
+              articles.forEach(element => {
+             
+               this.TitleAR.push(element);
+               // console.log(element.Title);
+             
+            
+             });
+        
+      });
+            
+          /*articles.forEach(element => {
+             
+               this.TitleAR.push(element.Title);
+               // console.log(element.Title);
+             
+            
+             });*/
+    
+             },
+ 
 
 };
 </script>

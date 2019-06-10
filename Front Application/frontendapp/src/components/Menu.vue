@@ -1,5 +1,6 @@
 <template>
   <div class="menu">
+      <img src="../assets/img/logoNews.png" class="logo" />
            <br><br>
            <label class="menulinks">All News</label>
        <label class="menulinks">Categories</label>
