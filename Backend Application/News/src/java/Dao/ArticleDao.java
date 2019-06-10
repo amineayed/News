@@ -103,10 +103,10 @@ public class ArticleDao {
             public String fromListToJson(List<Article> articlesList){
                 String json="";
                 json=json+"[";
-                for(int i=0;i<articlesList.size();i++){
+                for(int i=0;i<articlesList.size()-2;i++){
                     json=json+(articlesList.get(i).toString())+",";
                 }
-                json=json+"]";
+                json=json+articlesList.get(articlesList.size()-1).toString()+"]";
                 return json;
             }
             
