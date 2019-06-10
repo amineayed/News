@@ -44,7 +44,7 @@ public class Article
 
     public String getTitle()
     {
-        return title;
+        return title.replace("\"", "'");
     }
 
     public void setTitle(String title)
@@ -54,7 +54,7 @@ public class Article
 
     public String getDescription()
     {
-        return description;
+        return description.replace("\"", "'");
     }
 
     public void setDescription(String description)
