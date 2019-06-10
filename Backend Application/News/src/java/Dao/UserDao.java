@@ -52,7 +52,7 @@ public class UserDao {
 
  public List<Category> FindAll(){
 
- return session.createSQLQuery("select * from user ").list();
+ return session.createSQLQuery("select u from User u ").list();
  }
 
  public void ExitSession(){

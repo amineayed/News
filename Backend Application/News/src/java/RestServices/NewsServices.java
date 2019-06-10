@@ -6,13 +6,18 @@
 package RestServices;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import Adapter.RSSAdapter;
+
 import Dao.ArticleDao;
 import Dao.CategoryDao;
 import Dao.UserDao;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.IOException;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import entities.Article;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
@@ -22,8 +27,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.xml.parsers.ParserConfigurationException;
-import org.xml.sax.SAXException;
+import org.json.JSONObject;
+
 
 /**
  * REST Web Service
@@ -65,14 +70,20 @@ public class NewsServices {
     
     @GET
     @Path("/articles/all")
-    public Response getCustomers() throws JsonProcessingException, IOException, SAXException, ParserConfigurationException{
-       
+    @Produces(MediaType.APPLICATION_JSON)
     
-      
-        String ArticlesListJson = objectMapper.writeValueAsString(articles.FindAll());
+    public Response getArticles() throws JsonProcessingException{
+       
+   ;
+     
+String ArticlesListJson = articles.fromListToJson(articles.FindAll());
+     
         
         
+       
+   
         return Response.ok(ArticlesListJson).build();
+        
     }
     
 

@@ -48,7 +48,7 @@ public class CategoryDao {
 
  public List<Category> FindAll(){
 
- return session.createSQLQuery("select * from category ").list();
+ return session.createSQLQuery("select c from Category c").list();
  }
 
  public void ExitSession(){

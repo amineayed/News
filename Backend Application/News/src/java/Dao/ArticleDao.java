@@ -35,14 +35,14 @@ public class ArticleDao {
  session.update(f);
  session.getTransaction().commit();
  }
- public Article FindArticle(String id) {
+ public Article FindArticle(int id) {
  session.beginTransaction();
  Article f;
  f = (Article) session.get(Article.class, id);
  return (f);
  }
 
- public void RemoveArticle(String id) {
+ public void RemoveArticle(int id) {
  session.beginTransaction();
  Article f;
  f = FindArticle(id);
@@ -52,7 +52,7 @@ public class ArticleDao {
 
  public List<Article> FindAll(){
 
- return session.createSQLQuery("select * from article").list();
+ return session.createQuery("select a from Article a").list();
  }
 
  public void ExitSession(){
@@ -99,6 +99,16 @@ public class ArticleDao {
     return session.createSQLQuery("select * from article a where a.date like '%"+date+"%'").list();
    
  }
+            
+            public String fromListToJson(List<Article> articlesList){
+                String json="";
+                json=json+"[";
+                for(int i=0;i<articlesList.size();i++){
+                    json=json+(articlesList.get(i).toString())+",";
+                }
+                json=json+"]";
+                return json;
+            }
             
           
 }

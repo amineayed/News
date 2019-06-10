@@ -102,17 +102,22 @@ public class Article
         this.date = date;
     }
 
+    public Article() {
+    }
+
+    @Override
     public String toString()
     {
 
-        return "ID: " + this.getIdArticle() + "\n" +
-                "Category: " + this.getCategory().getTitle() + "\n" +
-                "Title: " + this.getTitle() + "\n" +
-                "Description: " + this.getDescription() + "\n" +
-                "Source: " + this.getSource() + "\n" +
-                "Link: " + this.getLink() + "\n" +
-                "Image: " + this.getImage() + "\n" +
-                "Date: " + this.getDate() + "\n";
+        return "{\"ID\" :  " + this.getIdArticle() + "," +
+               
+                "\"Title\" : \"" + this.getTitle() + "\"," +
+                "\"Link\" : \"" + this.getLink() + "\"," +
+                "\"Description\" : \"" + this.getDescription() + "\"," +
+                 "\"Image\" : \"" + this.getImage() + "\"," +
+                "\"Date\" : \"" + this.getDate() + "\","+
+                "\"Source\" : \"" + this.getSource() + "\"," +
+                 "\"Category \" : { \"title\": \"" + this.getCategory().getTitle() + "\"}}" ;
     }
 
 }
