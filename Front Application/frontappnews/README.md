@@ -1,4 +1,4 @@
-# frontendapp
+# frontappnews
 
 ## Project setup
 ```
