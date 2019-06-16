@@ -74,7 +74,7 @@ public class NewsServices {
     
     public Response getArticles() throws JsonProcessingException{
        
-   ;
+   
      
 String ArticlesListJson = articles.fromListToJson(articles.FindAll());
      

@@ -1,6 +1,6 @@
 <template>
+<div  v-if="Visibility" >
 
- 
        <div class="logform"> 
             
             <div class="labeldiv2hover divongletleft">
@@ -21,18 +21,34 @@
            <label class="Password-">Password : </label>
            <input id="password" class="passinput" type="password"/><br><br>
            <label class="Forgot-your-password-">Forgot your password ?</label>
-           <button class="logbt"><label class="Log-Intxt">Log In</label></button>
-            </div>
+         <router-link to="/HomePage" > <button class="logbt" @click="login" ><label class="Log-Intxt">  Log In </label></button></router-link> 
+       
+</div>
 
        </div>
-    
+
+</div>
+
 </template>
-<script>
-export default {
-    name:"login"
-}
-</script>
 
 <style>
-  @import './assets/css/login.css';
+
+
+  @import '../assets/css/login.css';
 </style>
+<script>
+export default{
+    name:"Login",
+    data(){
+      return{
+       Visibility:true,
+      }
+    },
+    
+methods:{
+     login(){
+       this.Visibility=!this.Visibility;
+     }
+}
+}
+</script>

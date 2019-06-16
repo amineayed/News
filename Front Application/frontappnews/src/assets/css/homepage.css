@@ -18,52 +18,48 @@
   .leftnewsbox{
        
         width: 463px;
-        height: 520px;
+        height: 680px;
         opacity: 0.76;
         box-shadow: 20px 20px 0 0 rgba(0, 0, 0, 0.16);
         background-color: #ffffff;
         margin-left:149px;
-        float:left;
-        margin-bottom:8%;
+        margin-top:40px;
+       float:left;
+        margin-bottom:5%;
      
         
       
   }
   
   .News-Title {
-    width: 187px;
-    height: 64px;
     font-family: "Verdana";
-    font-size: 41px;
-    font-weight: normal;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: 1.32;
-    letter-spacing: normal;
-    padding-left: 5%;
-  
-    text-align: left;
+    font-size: 25px;
+  padding-left: 8%;
+  padding-right: 8%;
     color: #707070;
     
   }  
   .NewsImage{
 
-        width: 328px;
+        width: 360px;
         height: 279px;
-        object-fit: contain;
-        opacity: 0.69;
+        object-fit: fill;
+        
         box-shadow: 0 3px 45px 0 rgba(0, 0, 0, 0.16);
         margin-left:49px;
-        margin-top:30px;
+    
       
   }
 .Arrow{
     width:30px;
     height:30px;
-    margin-left: 400px;
+    margin-left: 10px;
+    margin-top:9px;
+    margin-bottom: 10px;
 }
 .newsdesc{
   font-family: "Verdana";
+  height:50px;
   padding-left: 8%;
   padding-right: 8%;
 }
@@ -81,4 +77,48 @@
   color: #ffffff;
   margin-left:100px;
 
+}
+.logout{
+  width: 81px;
+  height: 47px;
+  font-family: "Verdana";
+  font-size: 25px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.32;
+  letter-spacing: normal;
+  text-align: left;
+  color: #ffffff;
+  margin-left:800px;
+
+}
+.logo{
+  height:100px;
+  width:100px;
+  float:left;
+}
+.addbt{
+  height:50px;
+  width:50px;
+  float:left;
+  margin-left:340px;
+}
+hr {
+  border:none;
+  height: 20px;
+ 	width: 100%;
+	height: 50px;
+	margin-top: 0;
+	border-bottom: 1px solid #F0F1F1;
+	box-shadow: 0 20px 20px -20px #333;
+  margin: -50px auto 10px; 
+}
+
+
+
+.articleimg{
+  height:300px;
+  width:700px;
+  margin-left: 25%;
 }
