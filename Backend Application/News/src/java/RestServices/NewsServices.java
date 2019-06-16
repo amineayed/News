@@ -11,23 +11,23 @@ import Dao.ArticleDao;
 import Dao.CategoryDao;
 import Dao.UserDao;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import entities.Article;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.google.gson.JsonArray;
+import entities.User;
+
 
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import org.json.JSONObject;
+import org.json.JSONArray;
+
 
 
 /**
@@ -80,13 +80,43 @@ String ArticlesListJson = articles.fromListToJson(articles.FindAll());
      
         
         
+        
        
    
         return Response.ok(ArticlesListJson).build();
         
     }
     
+    
+    @GET
+    @Path("/login/{login}/{password}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getUser(@PathParam("login") String login,@PathParam("password") String password){
+        User user=users.GetUser(login, password);
+        
+        
+            return Response.ok(user.toString()).build();
+        
+    }
+    
+    
+    @GET
+    @Path("/user/add/{login}/{password}/{email}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response AddUser(@PathParam("login") String login,@PathParam("password") String password,@PathParam("email") String email){
+        User user=new User(login, password, email);
+       user= users.AddUser(user);
+         return Response.ok(user.toString()).build();
+    }
 
+    
+    @GET
+    @Path("/favorite/{id}/{category}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response Favorites(@PathParam("id") int id,@PathParam("category") String category){
+        
+        return Response.ok().build();
+    }
 
     /**
      * PUT method for updating or creating an instance of NewsServices

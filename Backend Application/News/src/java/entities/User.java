@@ -76,6 +76,11 @@ public class User  implements java.io.Serializable {
         this.categories.add(categ);
     }
 
+    @Override
+    public String toString() {
+        return "{ \"iduser\" : " + this.iduser + ", \"login\" : \"" + this.login + "\", \"password\" : \"" + this.password + "\", \"mail\" : \"" + this.mail + "\"}";
+    }
+
 
 
 

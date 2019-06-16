@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import org.hibernate.Session;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  *
@@ -101,10 +103,14 @@ public class ArticleDao {
  }
             
             public String fromListToJson(List<Article> articlesList){
+                
+                JSONObject jsarr=null;
                 String json="";
+                  
                 json=json+"[";
                 for(int i=0;i<articlesList.size()-2;i++){
                     json=json+(articlesList.get(i).toString())+",";
+                    
                 }
                 json=json+articlesList.get(articlesList.size()-1).toString()+"]";
                 return json;

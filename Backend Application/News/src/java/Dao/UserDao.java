@@ -9,6 +9,7 @@ import Hiber.NewHibernateUtil;
 import entities.Category;
 import entities.User;
 import java.util.List;
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 /**
@@ -19,30 +20,72 @@ public class UserDao {
     private NewHibernateUtil helper;
  private Session session;
  
- 
- public UserDao() {
+    /**
+     *
+     */
+    public UserDao() {
  helper = new NewHibernateUtil();
  session = helper.getSessionFactory().openSession();
  }
- public void AddUser(User f) {
+
+    /**
+     *
+     * @param f
+     */
+    public User AddUser(User f) {
 
  session.beginTransaction();
  session.save(f);
- session.getTransaction().commit();
- }
- public void EditUser(User f) {
+ 
+         session.getTransaction().commit();
+         User user=null;
+                 user=this.FindUser(f.getIduser());
+         return user;
+
+    }
+
+    /**
+     *
+     * @param f
+     */
+    public void EditUser(User f) {
  session.beginTransaction();
  session.update(f);
  session.getTransaction().commit();
  }
- public User FindUser(String id) {
+
+    /**
+     *
+     * @param id
+     * @return
+     */
+    public User FindUser(int id) {
  session.beginTransaction();
  User f=null;
  f = (User) session.get(User.class, id);
  return (f);
  }
+ 
+    /**
+     *
+     * @param login
+     * @param password
+     * @return
+     */
+    public User GetUser(String login,String password){
+     User user =null;
+        Query query =session.createQuery("select u from User u where login = :login and password = :password");
+        query.setParameter("login", login);
+        query.setParameter("password",password);
+        user=(User) query.uniqueResult();
+     return user;
+ }
 
- public void RemoveUser(String id) {
+    /**
+     *
+     * @param id
+     */
+    public void RemoveUser(int id) {
  session.beginTransaction();
  User f;
  f = FindUser(id);
@@ -50,17 +93,29 @@ public class UserDao {
  session.getTransaction().commit();
  }
 
- public List<Category> FindAll(){
+    /**
+     *
+     * @return
+     */
+    public List<Category> FindAll(){
 
  return session.createSQLQuery("select u from User u ").list();
  }
 
- public void ExitSession(){
+    /**
+     *
+     */
+    public void ExitSession(){
  session.close();
  }
 
- public List<User> findbyMail(String mail){
-     return session.createSQLQuery("select * from user where mail like '%"+mail+"%'").list();
+    /**
+     *
+     * @param mail
+     * @return
+     */
+    public List<User> findbyMail(String mail){
+     return session.createQuery("select u from User u where mail like '%:mail%'").setParameter("mail", mail).list();
  }
 
 
