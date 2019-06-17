@@ -5,7 +5,7 @@
            <label class="menulinks">All News</label>
        <label class="menulinks">Categories</label>
        <label class="menulinks">Favorite Articles</label>
-       <label class="menulinks">My News</label>
+      <router-link to="/mynews"> <label class="menulinks">My News</label></router-link>
        
        <router-link to="/"><label class="logout">Log Out</label></router-link>
        </div>
