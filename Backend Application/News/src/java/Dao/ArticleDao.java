@@ -104,7 +104,7 @@ public class ArticleDao {
             
             public String fromListToJson(List<Article> articlesList){
                 
-                JSONObject jsarr=null;
+                
                 String json="";
                   
                 json=json+"[";

@@ -5,6 +5,7 @@
  */
 package RestServices;
 
+import Adapter.RSSAdapter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import Dao.ArticleDao;
@@ -12,7 +13,14 @@ import Dao.CategoryDao;
 import Dao.UserDao;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonArray;
+import entities.Article;
+import entities.Category;
 import entities.User;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 
 import javax.ws.rs.core.Context;
@@ -26,7 +34,9 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.xml.parsers.ParserConfigurationException;
 import org.json.JSONArray;
+import org.xml.sax.SAXException;
 
 
 
@@ -111,12 +121,47 @@ String ArticlesListJson = articles.fromListToJson(articles.FindAll());
 
     
     @GET
-    @Path("/favorite/{id}/{category}")
+    @Path("/Addfavorite/{id}/{category}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response Favorites(@PathParam("id") int id,@PathParam("category") String category){
         
-        return Response.ok().build();
+        User user=users.FindUser(id);
+        users.ExitSession();
+        Category user_category=categorys.FindCategory(category);
+       
+        Set categories=new  HashSet(0);
+        categories.add(user_category);
+        user.setCategories(categories);
+        users=new UserDao();
+        users.EditUser(user);
+       
+        
+        return Response.ok("{\"id\":5}").build();
     }
+    
+    
+    @GET
+    @Path("/reload")
+    public void ReloadArticles() throws IOException, SAXException, ParserConfigurationException{
+        ArticleDao.CleanArticleTable();
+        ArticleDao.AddArticleAdapter(RSSAdapter.retrieveAllNews());
+    }
+    
+    
+    @GET
+    @Path("/GetFavorites/{id}")
+    public Response GetFavorites(@PathParam("id") int id){
+        User user=users.FindUser(id);
+        List<Article> FavoritArticles=new ArrayList<Article>();
+       Object[] CategoriesArray = user.getCategories().toArray(new Category[user.getCategories().size()]);
+        for(int i=0;i<CategoriesArray.length;i++){
+        FavoritArticles.addAll(articles.FindbyCategory((Category) CategoriesArray[i]));
+                }
+       return  Response.ok(articles.fromListToJson(FavoritArticles)).build();
+    }
+    
+    
+    
 
     /**
      * PUT method for updating or creating an instance of NewsServices

@@ -9,6 +9,7 @@ import Hiber.NewHibernateUtil;
 import entities.Category;
 import entities.User;
 import java.util.List;
+import java.util.Set;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -42,6 +43,10 @@ public class UserDao {
                  user=this.FindUser(f.getIduser());
          return user;
 
+    }
+    
+    public void addUser_Prefences(int id,String category){
+        session.createSQLQuery("insert into user_preferences values("+id+",\"category\")").executeUpdate();
     }
 
     /**
@@ -118,6 +123,23 @@ public class UserDao {
      return session.createQuery("select u from User u where mail like '%:mail%'").setParameter("mail", mail).list();
  }
 
+ public String fromListToJson(Set CategorySet){
+                
+                
+                String json="";
+                  
+                json=json+"[";
+             
+Category category=null;
+                Object[] CategoriesArray = CategorySet.toArray(new Category[CategorySet.size()]);
+                
+for (int i = 0; i < CategoriesArray.length-2; i++) {
+    category=(Category)CategoriesArray[i];
+ json=json+(category.toString())+",";
+}
 
+               json=json+CategoriesArray[CategoriesArray.length-1].toString()+"]";
+                return json;
+            }
 
 }

@@ -6,6 +6,7 @@
 package Dao;
 
 import Hiber.NewHibernateUtil;
+import entities.Article;
 import entities.Category;
 import java.util.List;
 /*import javax.faces.bean.ManagedBean;
@@ -50,6 +51,10 @@ public class CategoryDao {
 
  return session.createSQLQuery("select c from Category c").list();
  }
+ 
+ 
+    
+           
 
  public void ExitSession(){
  session.close();
