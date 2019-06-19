@@ -1,6 +1,7 @@
 
 package Control;
 
+
 import Adapter.RSSAdapter;
 import Dao.ArticleDao;
 import java.io.IOException;
@@ -30,9 +31,7 @@ public class AddArticleServlet extends HttpServlet {
                ArticleDao.CleanArticleTable();
             ArticleDao.AddArticleAdapter(RSSAdapter.retrieveAllNews());
             
-        } catch (ParserConfigurationException ex) {
-            Logger.getLogger(AddArticleServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SAXException ex) {
+        } catch (ParserConfigurationException | SAXException ex) {
             Logger.getLogger(AddArticleServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

@@ -1,8 +1,9 @@
 package entities;
-// Generated 29 avr. 2019 22:52:54 by Hibernate Tools 4.3.1
+// Generated 17 juin 2019 23:35:10 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -15,25 +16,24 @@ public class User  implements java.io.Serializable {
      private String login;
      private String password;
      private String mail;
-     private Set categories = new HashSet(0);
+     private Set<Category> categories =  new HashSet<Category>(0);
 
     public User() {
     }
 
-   public User (Integer iduser)
-   {
-       this.iduser=iduser;
-   }
-    public User(String login, String password, String mail) {
-        this.login = login;
-        this.password = password;
-        this.mail = mail;
-    }
-    public User(String login, String password, String mail, Set categories) {
+    public User(String login, String password, String mail, Set  categories) {
        this.login = login;
        this.password = password;
        this.mail = mail;
        this.categories = categories;
+    }
+
+    public User(String login, String password, String email) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public User(int parseInt) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
    
     public Integer getIduser() {
@@ -64,21 +64,20 @@ public class User  implements java.io.Serializable {
     public void setMail(String mail) {
         this.mail = mail;
     }
-    public Set getCategories() {
+    public Set  getCategories() {
         return this.categories;
     }
     
-    public void setCategories(Set categories) {
+    public void setCategories(Set  categories) {
         this.categories = categories;
     }
-    public void addCategories(Category categ)
+  public void addCategories(Category categ)
     {
         this.categories.add(categ);
     }
-
     @Override
     public String toString() {
-        return "{ \"iduser\" : " + this.iduser + ", \"login\" : \"" + this.login + "\", \"password\" : \"" + this.password + "\", \"mail\" : \"" + this.mail + "\"}";
+        return "{\"id\":" + iduser + ", \"login\":\"" + login + "\", \"password\":\"" + password + "\", \"mail\":\"" + mail + "\"}";
     }
 
 

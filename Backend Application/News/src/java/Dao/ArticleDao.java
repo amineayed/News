@@ -79,26 +79,26 @@ public class ArticleDao {
  }
 
      public List<Article> FindbyCategory(Category category){
-    return session.createSQLQuery("select * from article a where a.category_title like '%"+category.getTitle()+"%'").list();
+    return session.createQuery("select a from Article a where category.title like :title").setParameter("title", "%"+category.getTitle()+"%").list();
  }
 
     public List<Article> Findbytitle(String title){
-    return session.createSQLQuery("select * from article a where a.Title like '%"+title+"%'").list();
+    return session.createQuery("select a from Article a where title like :title").setParameter("title","%"+title+"%").list();
  }
     
     
      public List<Article> Findbysource(String source){
-    return session.createSQLQuery("select * from article a where a.source like '%"+source+"%'").list();
+    return session.createQuery("select a from Article a where source like :source").setParameter("source", "%"+source+"%").list();
    
  }
      
        public List<Article> FindbyDescription(String description){
-    return session.createSQLQuery("select * from article a where a.Description like '%"+description+"%'").list();
+    return session.createSQLQuery("select a from Article a where description like :description").setParameter("description","%"+description+"%").list();
    
  }
        
             public List<Article> Findbydate(String date){
-    return session.createSQLQuery("select * from article a where a.date like '%"+date+"%'").list();
+    return session.createSQLQuery("select a from Article a where date like :date").setParameter("date","%"+date+"%").list();
    
  }
             
@@ -106,15 +106,23 @@ public class ArticleDao {
                 
                 
                 String json="";
+                  Article article=null;
                   
                 json=json+"[";
-                for(int i=0;i<articlesList.size()-2;i++){
-                    json=json+(articlesList.get(i).toString())+",";
+                for(int i=0;i<articlesList.size()-1;i++){
+                    article=(Article)articlesList.get(i);
+                    json=json+(article.toString())+",";
                     
                 }
-                json=json+articlesList.get(articlesList.size()-1).toString()+"]";
+                article=(Article)articlesList.get(articlesList.size()-1);
+                json=json+article.toString()+"]";
                 return json;
             }
             
-          
+    /**
+     *
+     * @param articlesList
+     * @return
+     */
+    
 }

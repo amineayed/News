@@ -36,7 +36,7 @@ export default {
       
     };
   },
-  created(){       
+  created(){      
      axios.get("http://localhost:8080/News/articles/all").then((response)=>{
               var articles=response.data;
               articles.forEach(element => {    

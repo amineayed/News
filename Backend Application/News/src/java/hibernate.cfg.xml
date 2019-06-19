@@ -47,7 +47,7 @@ Contributor(s):
     <property name="hibernate.connection.username">root</property>
     <mapping resource="entities/Category.hbm.xml"/>
     <mapping resource="entities/User.hbm.xml"/>
-    <mapping resource="entities/Article.hbm.xml"/>
     <mapping resource="entities/Website.hbm.xml"/>
+    <mapping resource="entities/Article.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

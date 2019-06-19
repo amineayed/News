@@ -1,5 +1,5 @@
 package entities;
-// Generated 29 avr. 2019 22:52:54 by Hibernate Tools 4.3.1
+// Generated 17 juin 2019 23:35:10 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -48,11 +48,6 @@ public class Category  implements java.io.Serializable {
     
     public void setUsers(Set users) {
         this.users = users;
-    }
-
-    @Override
-    public String toString() {
-       return "{\"title\":\""+this.title+"\"}";
     }
 
 

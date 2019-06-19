@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 29 avr. 2019 22:52:57 by Hibernate Tools 4.3.1 -->
+<!-- Generated 17 juin 2019 23:35:10 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="entities.User" table="user" catalog="news" optimistic-lock="version">
         <id name="iduser" type="java.lang.Integer">
@@ -9,13 +9,13 @@
             <generator class="identity" />
         </id>
         <property name="login" type="string">
-            <column name="login" length="250" not-null="true" />
+            <column name="login" length="250" />
         </property>
         <property name="password" type="string">
-            <column name="password" length="250" not-null="true" />
+            <column name="password" length="250" />
         </property>
         <property name="mail" type="string">
-            <column name="mail" length="250" not-null="true" />
+            <column name="mail" length="250" />
         </property>
         <set name="categories" table="user_preferences" inverse="false" lazy="true" fetch="select">
             <key>
