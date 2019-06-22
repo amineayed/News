@@ -20,7 +20,7 @@ import entities.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
+
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
@@ -32,6 +32,7 @@ import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+
 
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
@@ -117,9 +118,8 @@ String ArticlesListJson = articles.fromListToJson(articles.FindAll());
         User user=users.FindUser(id);
         users.ExitSession();
         Category user_category=categorys.FindCategory(category);
-        Set categories = new HashSet();
-        categories.add(user_category);
-        user.setCategories(categories);
+       
+        user.getCategories().add(user_category);
         users=new UserDao();
         users.EditUser(user);
         return Response.ok().build();
@@ -163,7 +163,38 @@ String ArticlesListJson = articles.fromListToJson(articles.FindAll());
     }
     
     
+    @GET
+    @Path("/articles/getfavorites/{id}/{article}")
+    public Response getFavoriteArticles(@PathParam("id") int id,@PathParam("article") int articleId){
+        User user=users.FindUser(id);
+        user.getArticles().add(articles.FindArticle(articleId));
+        users.ExitSession();
+        users=new UserDao();
+        users.EditUser(user);
+      
+        return Response.ok().build();
+    }
     
+    @GET
+    @Path("/user/update/{id}/{login}/{password}/{email}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response ProfileUpload(@PathParam("id") int id,@PathParam("login") String login,@PathParam("password") String password,@PathParam("email") String email){
+    User user=users.FindUser(id);
+    if(login != ""){
+        user.setLogin(login);
+    }
+    if(password != ""){
+        user.setPassword(password);
+    }
+    if(email != ""){
+        user.setMail(email);
+    }
+    users.ExitSession();
+    users=new UserDao();
+    users.EditUser(user);
+        return Response.ok(user.toString()).build();
+    }
 
     /**
      * PUT method for updating or creating an instance of NewsServices

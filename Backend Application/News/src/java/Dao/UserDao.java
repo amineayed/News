@@ -46,7 +46,7 @@ public class UserDao {
     }
     
     public void addUser_Prefences(int id,String category){
-        session.createSQLQuery("insert into user_preferences values("+id+",\"category\")").executeUpdate();
+        session.createSQLQuery("insert into user_preferences values("+id+",\""+category+"\")").executeUpdate();
     }
 
     /**

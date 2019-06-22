@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 17 juin 2019 23:35:10 by Hibernate Tools 4.3.1 -->
+<!-- Generated 21 juin 2019 16:21:59 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="entities.User" table="user" catalog="news" optimistic-lock="version">
         <id name="iduser" type="java.lang.Integer">
@@ -17,7 +17,15 @@
         <property name="mail" type="string">
             <column name="mail" length="250" />
         </property>
-        <set name="categories" table="user_preferences" inverse="false" lazy="true" fetch="select">
+        <set name="articles" table="favoritearticle" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="iduser" not-null="true" unique="true" />
+            </key>
+            <many-to-many entity-name="entities.Article">
+                <column name="id_Article" not-null="true" unique="true" />
+            </many-to-many>
+        </set>
+        <set name="categories" table="user_preferences" inverse="false" lazy="false" fetch="select">
             <key>
                 <column name="iduser" not-null="true" />
             </key>

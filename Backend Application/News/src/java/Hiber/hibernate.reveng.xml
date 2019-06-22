@@ -41,9 +41,10 @@ Contributor(s):
 -->
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="News"/>
+  <table-filter match-name="favoritearticle"/>
+  <table-filter match-name="user_preferences"/>
   <table-filter match-name="article"/>
   <table-filter match-name="user"/>
   <table-filter match-name="category"/>
-  <table-filter match-name="user_preferences"/>
   <table-filter match-name="website"/>
 </hibernate-reverse-engineering>
