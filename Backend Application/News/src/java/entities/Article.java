@@ -69,11 +69,11 @@ public class Article implements java.io.Serializable {
     }
 
     public String getTitle() {
-        return this.title;
+        return this.title.replace("\"", "'");
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        this.title = title.replace("\"", "'");
     }
 
     public String getLink() {
@@ -85,11 +85,11 @@ public class Article implements java.io.Serializable {
     }
 
     public String getDescription() {
-        return this.description;
+        return this.description.replace("\"", "'");
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.description = description.replace("\"", "'");
     }
 
     public String getImage() {

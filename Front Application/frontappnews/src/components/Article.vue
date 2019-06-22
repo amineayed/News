@@ -1,4 +1,5 @@
 <template>
+
 <div   style="display: table-cell;" class="backgroundcolor">
     
    <div class="leftnewsbox"  v-for="News in TitleAR" > 
@@ -42,6 +43,7 @@ export default {
               articles.forEach(element => {    
                this.TitleAR.push(element);
                 });
+                
         
       });   
              },
