@@ -1,124 +1,139 @@
 .backgroundcolor {
-    
-    background-color: #e5e5e5;
-  }
-  .menu {
-    
-    height: 100px;
- 
-    box-shadow: 0 3px 40px 0 rgba(0, 0, 0, 0.16);
-    background-image: linear-gradient(to right, #0073cb, #4a53ad 50%, #f00a6b);
-  }
+   background-color: #e5e5e5;
+  width:100%;
+  height:100%;
+  display: table-cell;
+}
+.menu {
+  
+  height: 100px;
+     width:100%;
+  box-shadow: 0 3px 40px 0 rgba(0, 0, 0, 0.16);
+  background-image: linear-gradient(to right, #0073cb, #4a53ad 50%, #f00a6b);
+}
 .pagecontent {
 
-    overflow: auto;
-   
-    background-color: #CED0D1;
-  }
-  .leftnewsbox{
-       
-        width: 463px;
-        height: 680px;
-        opacity: 0.76;
-        box-shadow: 20px 20px 0 0 rgba(0, 0, 0, 0.16);
-        background-color: #ffffff;
-        margin-left:149px;
-        margin-top:40px;
-       float:left;
-        margin-bottom:5%;
+  overflow: auto;
+ 
+  background-color: #CED0D1;
+}
+.leftnewsbox{
      
-        
+      width: 463px;
+      height: 680px;
+      opacity: 0.76;
+      box-shadow: 20px 20px 0 0 rgba(0, 0, 0, 0.16);
+      background-color: #ffffff;
+      margin-left:149px;
+      margin-top:40px;
+     float:left;
+      margin-bottom:5%;
+   
       
-  }
-  
-  .News-Title {
-    font-family: "Verdana";
-    font-size: 25px;
-  padding-left: 8%;
-  padding-right: 8%;
-    color: #707070;
     
-  }  
-  .NewsImage{
+}
 
-        width: 360px;
-        height: 279px;
-        object-fit: fill;
-        
-        box-shadow: 0 3px 45px 0 rgba(0, 0, 0, 0.16);
-        margin-left:49px;
-    
-      
-  }
-.Arrow{
-    width:30px;
-    height:30px;
-    margin-left: 10px;
-    margin-top:9px;
-    margin-bottom: 10px;
-}
-.newsdesc{
-  font-family: "Verdana";
-  height:50px;
-  padding-left: 8%;
-  padding-right: 8%;
-}
-.menulinks{
-  width: 81px;
-  height: 47px;
+.News-Title {
   font-family: "Verdana";
   font-size: 25px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 1.32;
-  letter-spacing: normal;
-  text-align: left;
-  color: #ffffff;
-  margin-left:100px;
+padding-left: 8%;
+padding-right: 8%;
+  color: #707070;
+  
+}  
+.NewsImage{
+
+      width: 360px;
+      height: 279px;
+      object-fit: fill;
+      
+      box-shadow: 0 3px 45px 0 rgba(0, 0, 0, 0.16);
+      margin-left:49px;
+  
+    
+}
+.Arrow{
+  width:30px;
+  height:30px;
+  margin-left: 10px;
+  margin-top:9px;
+  margin-bottom: 10px;
+}
+.newsdesc{
+font-family: "Verdana";
+height:50px;
+padding-left: 8%;
+padding-right: 8%;
+}
+.menulinks{
+width: 81px;
+height: 47px;
+font-family: "Verdana";
+font-size: 25px;
+font-weight: normal;
+font-style: normal;
+font-stretch: normal;
+line-height: 1.32;
+letter-spacing: normal;
+text-align: left;
+color: #ffffff;
+margin-left:100px;
 
 }
 .logout{
-  width: 81px;
-  height: 47px;
-  font-family: "Verdana";
-  font-size: 25px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 1.32;
-  letter-spacing: normal;
-  text-align: left;
-  color: #ffffff;
-  margin-left:800px;
+width: 81px;
+height: 47px;
+font-family: "Verdana";
+font-size: 25px;
+font-weight: normal;
+font-style: normal;
+font-stretch: normal;
+line-height: 1.32;
+letter-spacing: normal;
+text-align: left;
+color: #ffffff;
+margin-left:730px;
 
 }
 .logo{
-  height:100px;
-  width:100px;
-  float:left;
+height:100px;
+width:100px;
+float:left;
 }
 .addbt{
-  height:50px;
-  width:50px;
-  float:left;
-  margin-left:340px;
+height:50px;
+width:50px;
+float:left;
+margin-left:340px;
 }
-hr {
-  border:none;
-  height: 20px;
- 	width: 100%;
-	height: 50px;
-	margin-top: 0;
-	border-bottom: 1px solid #F0F1F1;
-	box-shadow: 0 20px 20px -20px #333;
-  margin: -50px auto 10px; 
+.articleseperator {
+border:none;
+height: 20px;
+ width: 100%;
+height: 50px;
+margin-top: 0;
+border-bottom: 1px solid #F0F1F1;
+box-shadow: 0 20px 20px -20px #333;
+margin: -50px auto 10px; 
 }
 
 
 
 .articleimg{
-  height:300px;
-  width:700px;
-  margin-left: 25%;
+height:300px;
+width:700px;
+margin-left: 25%;
+}
+.linkArticle{
+  text-decoration: none;
+}
+.News-Title:hover {
+
+  color:#0073cb
+  
+}  
+.filediv{
+  width:100%;
+  height:100%;
+  background-color: #F0F1F1;
 }
