@@ -3,7 +3,7 @@
     <p>Please Choose A configuration File </p>
     <p>If you don't have the structure please Download the file then modify the content then
         upload it again</p>
-    <button>GET FILE</button>
+    <input type="file" value="GET FILE" />
 </div>
 </template>
 <style>
