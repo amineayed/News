@@ -22,16 +22,11 @@ export default{
           file:'',
           categoriesArray:[],
           url:'',
-    
+         content:''
       }
     },
-    methods:{
-         UploadFile(){
-             this.file= this.$refs.uploadfield.files[0] ;
-             console.log(this.file);
-         },
-         Download(){
-      axios.get("http://localhost:8080/News/GetCateg/"+sessionStorage.getItem("user_ID")).then(
+           created(){
+ axios.get("http://localhost:8080/News/GetCateg/"+sessionStorage.getItem("user_ID")).then(
                (response)=>{
                   var categories=response.data;
                   categories.forEach(element =>{
@@ -39,15 +34,24 @@ export default{
                   })
                }
            );
+         },
+    methods:{
+         UploadFile(){
+             this.file= this.$refs.uploadfield.files[0] ;
+             console.log(this.file);
+         },
+         Download(){
+     
         var i;   
-        var content="";
+      
  for ( i = 0; i < this.categoriesArray.length; i++) {
-    content=content+this.categoriesArray[i]+": ON ";
+    this.content=this.content+this.categoriesArray[i]+":ON ";
+    this.content+='\n';
 
 }
-console.log(content);
 
-    var Blobfile=new Blob([content],{type:'text/plain;charset:utf-8'});
+    
+    var Blobfile=new Blob([this.content],{type:'text/plain;charset:utf-8'});
     var link =document.createElement('a');
     link.href = window.URL.createObjectURL(Blobfile);
     link.download ='file.txt';
@@ -56,6 +60,7 @@ console.log(content);
           
 
          },
+  
          
     }
 };
