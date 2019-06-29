@@ -26,6 +26,7 @@ import SignUp from "../components/SignUp";
 import Login from "../components/Login";
 import Menu from "../Menu";
 export default {
+  name:'SignUpLogin',
   components: {
     SignUp,
     Login,

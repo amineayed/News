@@ -5,9 +5,9 @@
            <br><br>
            <label class="menulinks" @click="Surfing('Article')">All News</label>
        <label class="menulinks" @click="Surfing('FilterNews')">Configure My News</label>
-       <label class="menulinks">Favorite Articles</label>
+       <label class="menulinks" @click="Surfing('FavoriteArticles')">Favorite Articles</label>
        <label class="menulinks"   @click="Surfing('MyNews')">My News</label>
-       <label class="logout">Log Out</label>
+       <label class="logout" @click="Logout('SignUpLogin')">Log Out</label>
        </div>
        <br>
        <component :is="Component"></component>
@@ -18,21 +18,33 @@
 import Article from "./components/Article"
 import MyNews from "./components/MyNews"
 import FilterNews from "./components/FilterNews"
+import FavoriteArticles from "./components/Favorite"
+import SignUpLogin from "./views/SignUpLogin"
 export default{
     name:"Menu",
     components:{
       Article,
       MyNews,
-      FilterNews
+      FilterNews,
+      FavoriteArticles,
+      SignUpLogin
+      
     },
     data(){
         return{
         Component:"Article"
     }
+
+    ''
 },
 methods:{
   Surfing(element){
       this.Component=element;
+  },Logout(element){
+    sessionStorage.clear;
+    this.Component=element;
+
+
   }
 }
 }

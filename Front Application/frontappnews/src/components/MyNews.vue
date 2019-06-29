@@ -2,8 +2,8 @@
 <div>
 <div   style="display: table-cell;" class="backgroundcolor">
 
- 
-   <div class="leftnewsbox"  v-for="News in TitleAR" > 
+ <h1 v-if="message!=''">{{message}}</h1>
+   <div class="leftnewsbox"  v-for="News in TitleAR" :key="News.ID"> 
               <img src="../assets/img/addbt.png" class="addbt"  />
             <img class="Arrow" src="../assets/img/arrow.png" @click="OpenNewTAB(News.Link)" >
               <br>
@@ -35,15 +35,21 @@ export default {
   data() {
     return {
         TitleAR:[],
+        message:''
       
     };
   },
   created(){       
-     axios.get("http://localhost:8080/News/articles/all").then((response)=>{
+     axios.get("http://localhost:8080/News/GetCategoriesedArticles/"+sessionStorage.getItem("user_ID")).then((response)=>{
               var articles=response.data;
+              if(articles.message==null){
               articles.forEach(element => {    
                this.TitleAR.push(element);
                 });
+     }else{
+       this.message=articles.message;
+
+     }
         
       });  
              },

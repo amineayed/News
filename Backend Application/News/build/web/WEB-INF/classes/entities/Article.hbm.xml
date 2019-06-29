@@ -31,10 +31,10 @@
         </property>
         <set name="users" table="favoritearticle" inverse="true" lazy="false" fetch="select">
             <key>
-                <column name="id_Article" not-null="true" unique="true" />
+                <column name="id_Article" not-null="true" unique="false" />
             </key>
             <many-to-many entity-name="entities.User">
-                <column name="iduser" not-null="true" unique="true" />
+                <column name="iduser" not-null="true" unique="false" />
             </many-to-many>
         </set>
     </class>

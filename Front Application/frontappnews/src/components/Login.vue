@@ -3,13 +3,13 @@
 
     <div class="inputs">
       <label class="Username-">Username :</label>
-     &nbsp;&nbsp; <input id="username" class="userinput" type="text">
+     &nbsp;&nbsp; <input id="username" class="userinput" type="text" v-model="username">
       <br>
       <br>
       <br>
       <br>
       <label class="Password-">Password :</label>
-      &nbsp;&nbsp; <input id="password" class="passinput" type="password">
+      &nbsp;&nbsp; <input id="password" class="passinput" type="password" v-model="password">
       <br>
       <br>
       <label class="Forgot-your-password-">Forgot your password ?</label>
@@ -27,23 +27,35 @@
 @import "../assets/css/login.css";
 
 </style>
-<script>
 
+<script>
+import axios from 'axios'
 export default {
   name: "Login",
 
   data() {
     return {
-       access:false
+       access:false,
+       username:'',
+       password:''
     
     };
   },
 
   methods: {
     login(){
-      this.$emit('logged');
+      axios.get("http://localhost:8080/News/login/"+this.username+"/"+this.password).then((response)=>{
+              var user=response.data;
+              if(user.message==null){
+                sessionStorage.setItem("user_ID",user.iduser);
+                this.$emit('logged');
+      }else{
+        alert("username or password invalide !");
+      }
+      
  
-     }
+      });
   }
+}
 };
 </script>

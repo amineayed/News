@@ -97,7 +97,12 @@ String ArticlesListJson = articles.fromListToJson(articles.FindAll());
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUser(@PathParam("login") String login,@PathParam("password") String password){
         User user=users.GetUser(login, password);
-        return Response.ok(user.toString()).build();
+        if(user != null){
+            return Response.ok(user.toString()).build();
+        }else{
+        
+        return Response.ok("{\"message\":\"username or password invalide !\"}").build();
+        }
     }
     
 
@@ -106,9 +111,19 @@ String ArticlesListJson = articles.fromListToJson(articles.FindAll());
     @Path("/user/add/{login}/{password}/{email}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response AddUser(@PathParam("login") String login,@PathParam("password") String password,@PathParam("email") String email){
+       int emailTest=users.findbyEmail(email);
+       int LoginTest=users.findbyLogin(login);
+       
+       users.ExitSession();
+       if(emailTest ==0 && LoginTest==0){
         User user=new User(login, password, email);
+        users=new UserDao();
+                
         user= users.AddUser(user);
         return Response.ok(user.toString()).build();
+    }else{
+           return Response.ok("{\"iduser\":0}").build();
+       }
     }
 
     
@@ -142,14 +157,44 @@ String ArticlesListJson = articles.fromListToJson(articles.FindAll());
         }
     }
     
+    @GET
+    @Path("/GetFavoriteArticles/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getFavoriteArticles(@PathParam("id") int id){
+        User user=users.FindUser(id);
+        Set ArticlesSet=user.getArticles();
+        if(ArticlesSet.isEmpty()){
+            return Response.ok("{\"message\":\"No Favorite Articles !\"}").build();
+        }else{
+        String JSONResult="";
+        JSONResult=users.fromListToJsonArticles(ArticlesSet);
+        return Response.ok(JSONResult).build();
+        }
+        
+    }
+    
     
     @GET
-    @Path("/GetFavorites/{id}")
+    @Path("/RemoveFavoriteArticle/{userId}/{articleId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response RemoveFavoriteArticle(@PathParam("userId") int userId,@PathParam("articleId") int articleId){
+        User user=users.FindUser(userId);
+        Article article=articles.FindArticle(articleId);
+        user.setArticles((user.getArticles().remove(article)));
+        users=new UserDao();
+        users.EditUser(user);
+        return Response.ok("{}").build();
+    }
+            
+    
+    @GET
+    @Path("/GetCategoriesedArticles/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response GetFavorites(@PathParam("id") int id){
         User user=users.FindUser(id);
         List<Article> FavoritArticles=new ArrayList<>();
         Set<Category> set=user.getCategories();
+        if(set.isEmpty()!= true){
        List<Category> CategoriesArray =new ArrayList<>(set) ;
        
         for(int i=0;i<CategoriesArray.size();i++){
@@ -159,20 +204,35 @@ String ArticlesListJson = articles.fromListToJson(articles.FindAll());
                 }
          String json;
          json=articles.fromListToJson(FavoritArticles);
-       return  Response.ok(json).build();
+       return  Response.ok(json).build();}
+        else{
+            return Response.ok("{\"message\":\"No Category chosen !\"}").build();
+        }
     }
     
     
+    
+    
     @GET
-    @Path("/articles/getfavorites/{id}/{article}")
-    public Response getFavoriteArticles(@PathParam("id") int id,@PathParam("article") int articleId){
-        User user=users.FindUser(id);
-        user.getArticles().add(articles.FindArticle(articleId));
+    @Path("/setfavorites/{id}/{articleId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getFavoriteArticles(@PathParam("id") int id,@PathParam("articleId") int articleId){
+        int exist=users.getArticle(articleId, id);
+        if(exist ==0){
+            User user=users.FindUser(id);
+       Article article= articles.FindArticle(articleId);
+        
+         user.getArticles().add(article);
         users.ExitSession();
         users=new UserDao();
         users.EditUser(user);
+         return Response.ok("{\"message\":\"ok\"}").build();
+       
+       }else{
+             return Response.ok("{\"message\":\"This article is already a favorite one !\"}").build();
       
-        return Response.ok().build();
+       }
+       
     }
     
     @GET
