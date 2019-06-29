@@ -93,5 +93,7 @@ public class User implements java.io.Serializable {
     public String toString() {
         return "{ \"iduser\" : " + this.iduser + ", \"login\" : \"" + this.login + "\", \"password\" : \"" + this.password + "\", \"mail\" : \"" + this.mail + "\"}";
     }
+    
+  
 
 }

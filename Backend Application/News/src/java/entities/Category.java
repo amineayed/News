@@ -50,7 +50,9 @@ public class Category  implements java.io.Serializable {
         this.users = users;
     }
 
-
+ public String toString(){
+ return "{\"title\":\""+this.title+"\"}";
+ }
 
 
 }

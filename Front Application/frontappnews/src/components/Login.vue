@@ -48,6 +48,7 @@ export default {
               var user=response.data;
               if(user.message==null){
                 sessionStorage.setItem("user_ID",user.iduser);
+                sessionStorage.setItem("login",user.login);
                 this.$emit('logged');
       }else{
         alert("username or password invalide !");

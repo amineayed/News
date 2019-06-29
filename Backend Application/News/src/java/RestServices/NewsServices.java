@@ -180,7 +180,7 @@ String ArticlesListJson = articles.fromListToJson(articles.FindAll());
     public Response RemoveFavoriteArticle(@PathParam("userId") int userId,@PathParam("articleId") int articleId){
         User user=users.FindUser(userId);
         Article article=articles.FindArticle(articleId);
-        user.setArticles((user.getArticles().remove(article)));
+        user.setArticles((user.getArticles()));
         users=new UserDao();
         users.EditUser(user);
         return Response.ok("{}").build();
@@ -255,6 +255,7 @@ String ArticlesListJson = articles.fromListToJson(articles.FindAll());
     users.EditUser(user);
         return Response.ok(user.toString()).build();
     }
+    
 
     /**
      * PUT method for updating or creating an instance of NewsServices

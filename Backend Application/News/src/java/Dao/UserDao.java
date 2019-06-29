@@ -50,6 +50,7 @@ public class UserDao {
     public void addUser_Prefences(int id, String category) {
         session.createSQLQuery("insert into user_preferences values(" + id + ",\"" + category + "\")").executeUpdate();
     }
+    
 
     /**
      *
@@ -169,7 +170,7 @@ public class UserDao {
         Category category = null;
         Object[] CategoriesArray = CategorySet.toArray(new Category[CategorySet.size()]);
 
-        for (int i = 0; i < CategoriesArray.length - 2; i++) {
+        for (int i = 0; i < CategoriesArray.length - 1; i++) {
             category = (Category) CategoriesArray[i];
             json = json + (category.toString()) + ",";
         }
