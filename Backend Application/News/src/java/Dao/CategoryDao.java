@@ -60,11 +60,5 @@ public class CategoryDao {
  session.close();
  }
 
- /* public static void main(String args[]){
 
- Formation f = new Formation ("124","formation JEE"," module hibernate","03 h ");
- GererFormation agent = new GererFormation();
- agent.AddFormation(f);
- agent.ExitSession();
- }*/
 }

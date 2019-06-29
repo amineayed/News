@@ -1,10 +1,10 @@
 <template>
 
 <div    class="backgroundcolor">
-
+<h1 v-if="message!=''">{{message}}</h1>
    <div class="leftnewsbox"  v-for="News in TitleAR" :key="News.ID"> 
-     <div @click="addFavorite(News.ID)">
-              <img src="../assets/img/addbt.png" class="addbt"  />
+      <div @click="RemoveFavorite(News.ID)">
+              <img src="../assets/img/removebt.png" class="addbt"  />
      </div>
             <img class="Arrow" src="../assets/img/arrow.png" @click="OpenNewTAB(News.Link)" >
               <br>
@@ -29,22 +29,26 @@
 import axios from 'axios'
 
 export default {
- name:"Article",
+ name:"Favorite",
  components:{
   
  },
   data() {
     return {
         TitleAR:[],
-      
+      message:''
     };
   },
   created(){      
-     axios.get("http://localhost:8080/News/articles/all").then((response)=>{
+     axios.get("http://localhost:8080/News/GetFavoriteArticles/"+sessionStorage.getItem("user_ID")).then((response)=>{
               var articles=response.data;
+              if(articles.message==null){
               articles.forEach(element => {    
                this.TitleAR.push(element);
                 });
+              }else{
+this.message=articles.message;
+              }
                 
         
       });   
@@ -54,15 +58,8 @@ export default {
                  OpenNewTAB(link){
                   var win = window.open(link,'_blank')
                    win.focus();
-                },
-                addFavorite(ArticleId){
-                   axios.get("http://localhost:8080/News/setfavorites/"+sessionStorage.getItem("user_ID")+"/"+ArticleId).then((response)=>{
-              var result=response.data;
-              if(result.message!='ok'){
-                alert(result.message);
-              }
-        
-      }); 
+                },RemoveFavorite(ArticleId){
+                   axios.get("http://localhost:8080/News/RemoveFavoriteArticle/"+sessionStorage.getItem("user_ID")+"/"+ArticleId);
                 }
           
              }

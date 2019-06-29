@@ -8,13 +8,13 @@
             <column name="iduser" />
             <generator class="identity" />
         </id>
-        <property name="login" type="string">
+        <property name="login" type="string" unique="true">
             <column name="login" length="250" />
         </property>
         <property name="password" type="string">
             <column name="password" length="250" />
         </property>
-        <property name="mail" type="string">
+        <property name="mail" type="string" unique="true">
             <column name="mail" length="250" />
         </property>
         <set name="articles" table="favoritearticle" inverse="false" lazy="true" fetch="select">
