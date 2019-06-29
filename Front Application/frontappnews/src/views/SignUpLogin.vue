@@ -11,10 +11,7 @@
     
       </div>
   <hr class="seperatorlogin">
-<br>
-<br>
-<br>
-      <br>  
+
 
       <component :is="Component" @logged="logged"></component>
     </div>

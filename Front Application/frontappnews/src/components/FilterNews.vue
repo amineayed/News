@@ -5,13 +5,31 @@
     <hr class="seperatorlogin">
     <p class="text">If you don't have the structure please Download the file then modify the content then
         upload it again</p>
-    <input type="file" value="GET FILE" class="bt" />
+          <img src="../assets/Download.png"  @click="Download()" class="downloadicone"/><br>
+    <input type="file" value="GET FILE" class="bt" ref="uploadfield" @change="UploadFile()" />
     <br>
-    <button class="bt">
-         <label class="Log-Intxt">Download</label></button>
+
 </div>
 </template>
 <style>
 </style>
 <script>
+
+export default{
+    data(){
+      return{
+          file:''
+      }
+    },
+    methods:{
+         UploadFile(){
+             this.file= this.$refs.uploadfield.files[0] ;
+             console.log(this.file);
+         },
+         Download(){
+             alert("hello");
+         }
+    }
+};
+
 </script>

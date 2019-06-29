@@ -12,7 +12,7 @@
       &nbsp;&nbsp; <input id="password" class="passinput" type="password">
       <br>
       <br>
-      <label class="Forgot-your-password-">Forgot your password ?</label>
+
    
         <button class="logbt" @click="login()">
           <label class="Log-Intxt">Log In</label>
