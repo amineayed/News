@@ -29,7 +29,7 @@
         <property name="source" type="string">
             <column name="source" not-null="true" />
         </property>
-        <set name="users" table="favoritearticle" inverse="true" lazy="false" fetch="select">
+        <set name="users" table="favoritearticle" inverse="false" lazy="false" fetch="select">
             <key>
                 <column name="id_Article" not-null="true" unique="false" />
             </key>

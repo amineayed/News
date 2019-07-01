@@ -73,6 +73,12 @@ public class UserDao {
         f = (User) session.get(User.class, id);
         return (f);
     }
+    
+    public void deletefavoritearticle(int userid,int articleid){
+        
+        session.createSQLQuery("delete from favoritearticle where favoritearticle.iduser="+userid+" and favoritearticle.id_Article = "+articleid+";").executeUpdate();
+    
+    }
 
     /**
      *

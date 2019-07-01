@@ -13,7 +13,7 @@ public class User implements java.io.Serializable {
     private String login;
     private String password;
     private String mail;
-    private Set articles = new HashSet(0);
+    public Set articles = new HashSet(0);
     private Set categories = new HashSet(0);
     private String file;
 

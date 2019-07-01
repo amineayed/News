@@ -179,11 +179,25 @@ String ArticlesListJson = articles.fromListToJson(articles.FindAll());
     @Produces(MediaType.APPLICATION_JSON)
     public Response RemoveFavoriteArticle(@PathParam("userId") int userId,@PathParam("articleId") int articleId){
         User user=users.FindUser(userId);
+        
         Article article=articles.FindArticle(articleId);
+<<<<<<< HEAD
+        
+       
+       boolean test=article.removeUser(user);
+       
+            
+        articles.ExitSession();
+        articles=new ArticleDao();
+        articles.EditArticle(article);
+        return Response.ok("{\"msg\":"+test+"}").build();
+        
+=======
         user.setArticles((user.getArticles()));
         users=new UserDao();
         users.EditUser(user);
         return Response.ok("{}").build();
+>>>>>>> 2c0a3435bbb05f07621c0fe4d4474d0cef9c88d6
     }
             
     

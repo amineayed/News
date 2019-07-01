@@ -1,5 +1,8 @@
 <template>
+
 <div>
+ 
+ 
   <div class="menu">
       <img src="./assets/img/logoNews.png" class="logo" />
            <br><br>
@@ -7,7 +10,7 @@
        <label class="menulinks" @click="Surfing('FilterNews')">Configure My News</label>
        <label class="menulinks" @click="Surfing('FavoriteArticles')">Favorite Articles</label>
        <label class="menulinks"   @click="Surfing('MyNews')">My News</label>
-       <label class="logout" @click="Logout('SignUpLogin')">Log Out</label>
+       <label class="logout" @click="Logout()">Log Out</label>
        </div>
        <br>
        <component :is="Component"></component>
@@ -15,15 +18,16 @@
 </template>
 
 <script>
-import Article from "./components/Article"
+
 import MyNews from "./components/MyNews"
 import FilterNews from "./components/FilterNews"
 import FavoriteArticles from "./components/Favorite"
 import SignUpLogin from "./views/SignUpLogin"
-export default{
+import Article from "./components/Article"
+ export default{
     name:"Menu",
     components:{
-      Article,
+    Article,
       MyNews,
       FilterNews,
       FavoriteArticles,
@@ -35,14 +39,14 @@ export default{
         Component:"Article"
     }
 
-    ''
+    
 },
 methods:{
   Surfing(element){
       this.Component=element;
-  },Logout(element){
-    sessionStorage.clear;
-    this.Component=element;
+  },Logout(){
+    sessionStorage.removeItem("user_ID");
+    window.location.reload();
 
 
   }

@@ -12,8 +12,12 @@
 
 </div>
 </template>
+<script>
+</script>
 <style>
 </style>
+<<<<<<< HEAD
+=======
 <script>
 import axios from 'axios'
 export default{
@@ -86,3 +90,4 @@ export default{
 };
 
 </script>
+>>>>>>> 2c0a3435bbb05f07621c0fe4d4474d0cef9c88d6
