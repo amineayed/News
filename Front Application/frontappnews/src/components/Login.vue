@@ -12,7 +12,7 @@
       &nbsp;&nbsp; <input id="password" class="passinput" type="password" v-model="password">
       <br>
       <br>
-      <label class="Forgot-your-password-">Forgot your password ?</label>
+
    
         <button class="logbt" @click="login()">
           <label class="Log-Intxt">Log In</label>
@@ -48,6 +48,7 @@ export default {
               var user=response.data;
               if(user.message==null){
                 sessionStorage.setItem("user_ID",user.iduser);
+                sessionStorage.setItem("login",user.login);
                 this.$emit('logged');
       }else{
         alert("username or password invalide !");
