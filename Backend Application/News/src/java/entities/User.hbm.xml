@@ -28,7 +28,7 @@
                 <column name="id_Article" not-null="true" unique="true" />
             </many-to-many>
         </set>
-        <set name="categories" table="user_preferences" inverse="false" lazy="false" fetch="select">
+        <set name="categories" table="user_preferences" cascade="all" inverse="false" lazy="false" fetch="select">
             <key>
                 <column name="iduser" not-null="true" />
             </key>

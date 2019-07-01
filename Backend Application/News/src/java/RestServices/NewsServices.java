@@ -20,6 +20,7 @@ import entities.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import java.util.List;
 import java.util.Set;
@@ -40,6 +41,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.xml.parsers.ParserConfigurationException;
+import net.sf.ehcache.store.compound.factories.AATreeSet;
 
 import org.xml.sax.SAXException;
 
@@ -181,7 +183,7 @@ String ArticlesListJson = articles.fromListToJson(articles.FindAll());
         User user=users.FindUser(userId);
         
         Article article=articles.FindArticle(articleId);
-<<<<<<< HEAD
+
         
        
        boolean test=article.removeUser(user);
@@ -192,12 +194,9 @@ String ArticlesListJson = articles.fromListToJson(articles.FindAll());
         articles.EditArticle(article);
         return Response.ok("{\"msg\":"+test+"}").build();
         
-=======
-        user.setArticles((user.getArticles()));
-        users=new UserDao();
-        users.EditUser(user);
-        return Response.ok("{}").build();
->>>>>>> 2c0a3435bbb05f07621c0fe4d4474d0cef9c88d6
+
+       
+
     }
             
     
@@ -285,7 +284,7 @@ String ArticlesListJson = articles.fromListToJson(articles.FindAll());
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCategorizedArticles() throws JsonProcessingException, IOException{     
         ArrayList<String> categories = new ArrayList<String>();
-        FileConfiguration.FileReaderConfig fileReader = new FileConfiguration.FileReaderConfig("C:\\Users\\Alienware-PC\\Desktop\\category_config.txt");
+        FileConfiguration.FileReaderConfig fileReader = new FileConfiguration.FileReaderConfig("C:\\Users\\amin ayed\\Desktop\\file.txt");
         fileReader.populatingCateg();
     
         String ArticlesListJson = "";
@@ -304,17 +303,22 @@ String ArticlesListJson = articles.fromListToJson(articles.FindAll());
       User usr=users.FindUser(id);
       users.ExitSession();
       usr.setFile(categories);
-      users=new UserDao();
-      users.EditUser(usr);
-      String[] tabcateg=new String[20];
+     
+      String[] tabcateg=new String[12];
       tabcateg=categories.split("\\.");
-      String ch="";
-      
+      String aux="";
+      Set userCategories=new HashSet(0);
        for(int i=0; i<tabcateg.length;i++)
        {
-         ch+="  "+tabcateg[i].toString()+"\n";
+           aux=tabcateg[i];
+        if(aux.contains("ON")){
+            userCategories.add(new Category(aux.substring(0, aux.indexOf(":"))));
+            System.out.println(aux.substring(0, aux.indexOf(":")));
+        }
        }
-          System.out.println(ch);
+       usr.setCategories(userCategories);
+         users=new UserDao();
+      users.EditUser(usr);
           
      return null;
         

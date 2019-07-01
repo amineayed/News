@@ -60,7 +60,7 @@ this.message=articles.message;
                    win.focus();
                 },RemoveFavorite(ArticleId){
                    axios.get("http://localhost:8080/News/RemoveFavoriteArticle/"+sessionStorage.getItem("user_ID")+"/"+ArticleId);
-               
+                  
                }
           
              }
