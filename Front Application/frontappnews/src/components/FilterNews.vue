@@ -11,7 +11,7 @@
          <label class="Log-Intxt">Download</label></button>
 </div>
 </template>
-<style>
-</style>
 <script>
 </script>
+<style>
+</style>

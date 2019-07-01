@@ -2,6 +2,8 @@ package entities;
 // Generated 21 juin 2019 16:21:59 by Hibernate Tools 4.3.1
 
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -17,7 +19,7 @@ public class Article implements java.io.Serializable {
     private String image;
     private String date;
     private String source;
-    private Set users = new HashSet(0);
+    public Set<User> users = new HashSet(0);
 
     public Article() {
     }
@@ -71,7 +73,22 @@ public class Article implements java.io.Serializable {
     public String getTitle() {
         return this.title.replace("\"", "'");
     }
-
+    
+    public boolean removeUser(User user){
+      int i=0;
+      User user1=null;
+      boolean test=false;
+        Iterator it=this.users.iterator();
+        while(it.hasNext()){
+            user1= (User) it.next();
+            if(Objects.equals(user1.getIduser(), user.getIduser())){
+                test=this.getUsers().remove(user1);
+                
+            } else {
+            }
+        }
+        return test;
+    }
     public void setTitle(String title) {
         this.title = title.replace("\"", "'");
     }

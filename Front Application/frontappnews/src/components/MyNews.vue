@@ -4,7 +4,9 @@
 
  <h1 v-if="message!=''">{{message}}</h1>
    <div class="leftnewsbox"  v-for="News in TitleAR" :key="News.ID"> 
+     <div @click="addFavorite(News.ID)">
               <img src="../assets/img/addbt.png" class="addbt"  />
+     </div>
             <img class="Arrow" src="../assets/img/arrow.png" @click="OpenNewTAB(News.Link)" >
               <br>
                 <img v-bind:src="News.Image"
@@ -57,11 +59,20 @@ export default {
                 OpenNewTAB(link){
                   var win = window.open('link','_blank')
                    win.focus();
+                },
+                addFavorite(ArticleId){
+                   axios.get("http://localhost:8080/News/setfavorites/"+sessionStorage.getItem("user_ID")+"/"+ArticleId).then((response)=>{
+              var result=response.data;
+              if(result.message!='ok'){
+                alert(result.message);
+              }
+        
+      }); 
                 }
-          
-             }
- 
+             
 
+
+}
 };
 </script>
 <style>
