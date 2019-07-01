@@ -181,6 +181,7 @@ String ArticlesListJson = articles.fromListToJson(articles.FindAll());
         User user=users.FindUser(userId);
         
         Article article=articles.FindArticle(articleId);
+<<<<<<< HEAD
         
        
        boolean test=article.removeUser(user);
@@ -191,6 +192,12 @@ String ArticlesListJson = articles.fromListToJson(articles.FindAll());
         articles.EditArticle(article);
         return Response.ok("{\"msg\":"+test+"}").build();
         
+=======
+        user.setArticles((user.getArticles()));
+        users=new UserDao();
+        users.EditUser(user);
+        return Response.ok("{}").build();
+>>>>>>> 2c0a3435bbb05f07621c0fe4d4474d0cef9c88d6
     }
             
     
@@ -262,6 +269,7 @@ String ArticlesListJson = articles.fromListToJson(articles.FindAll());
     users.EditUser(user);
         return Response.ok(user.toString()).build();
     }
+    
 
     /**
      * PUT method for updating or creating an instance of NewsServices
