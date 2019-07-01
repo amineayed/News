@@ -15,6 +15,15 @@ public class User implements java.io.Serializable {
     private String mail;
     private Set articles = new HashSet(0);
     private Set categories = new HashSet(0);
+    private String file;
+
+    public String getFile() {
+        return file;
+    }
+
+    public void setFile(String file) {
+        this.file = file;
+    }
 
     public User() {
     }
@@ -25,6 +34,13 @@ public class User implements java.io.Serializable {
         this.mail = mail;
         this.articles = articles;
         this.categories = categories;
+    }
+
+    public User(String login, String password, String mail, String file) {
+        this.login = login;
+        this.password = password;
+        this.mail = mail;
+        this.file = file;
     }
 
     public User(Integer iduser) {

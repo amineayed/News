@@ -265,4 +265,59 @@ String ArticlesListJson = articles.fromListToJson(articles.FindAll());
     @Consumes(MediaType.APPLICATION_JSON)
     public void putJson(String content) {
     }
+    
+    @GET
+    @Path("/articles/categorized")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getCategorizedArticles() throws JsonProcessingException, IOException{     
+        ArrayList<String> categories = new ArrayList<String>();
+        FileConfiguration.FileReaderConfig fileReader = new FileConfiguration.FileReaderConfig("C:\\Users\\Alienware-PC\\Desktop\\category_config.txt");
+        fileReader.populatingCateg();
+    
+        String ArticlesListJson = "";
+        ArrayList<Article> articleList = new ArrayList<>();
+        for(int i = 0; i < fileReader.getCategorylist().size(); i++)
+        {      
+            articleList.addAll(articles.FindbyCategory(fileReader.getCategorylist().get(i)));          
+        }
+        ArticlesListJson = articles.fromListToJson(articleList);
+        return Response.ok(ArticlesListJson).build();      
+    }
+      @GET
+    @Path("/fileupload/{id}/{categories}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response GetCateg(@PathParam("id") int id,@PathParam("categories") String categories){
+      User usr=users.FindUser(id);
+      users.ExitSession();
+      usr.setFile(categories);
+      users=new UserDao();
+      users.EditUser(usr);
+      String[] tabcateg=new String[20];
+      tabcateg=categories.split("\\.");
+      String ch="";
+      
+       for(int i=0; i<tabcateg.length;i++)
+       {
+         ch+="  "+tabcateg[i].toString()+"\n";
+       }
+          System.out.println(ch);
+          
+     return null;
+        
+    }
+      @GET
+    @Path("/getcategfile/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response GetCateg(@PathParam("id") int id){
+      User usr=users.FindUser(id);
+   
+    
+       
+  String jsonstring = "["+usr.getFile()+"]";
+          
+       return Response.ok(jsonstring).build();
+          
+     
+        
+    }
 }

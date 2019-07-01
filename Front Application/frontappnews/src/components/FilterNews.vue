@@ -22,36 +22,56 @@ export default{
           file:'',
           categoriesArray:[],
           url:'',
-         content:''
+         content:'',
+         FileCateg:''
       }
     },
            created(){
- axios.get("http://localhost:8080/News/GetCateg/"+sessionStorage.getItem("user_ID")).then(
+ axios.get("http://localhost:8080/News/getcategfile/"+sessionStorage.getItem("user_ID")).then(
                (response)=>{
                   var categories=response.data;
-                  categories.forEach(element =>{
-                     this.categoriesArray.push(element.title);
-                  })
+                  categories=categories.substr(1,categories.length-2);
+                  this.categoriesArray=categories.split(" ");
+                  
+                console.log(this.categoriesArray);
+
                }
            );
          },
     methods:{
          UploadFile(){
+          
              this.file= this.$refs.uploadfield.files[0] ;
-             console.log(this.file);
+            var fileReader= new FileReader();
+  
+  fileReader.addEventListener("load",function(){
+              var ch;
+            ch= fileReader.result;
+         console.log(ch);
+       axios.get("http://localhost:8080/News/fileupload/"+sessionStorage.getItem("user_ID")+"/"+ch).then(
+           (response)=>{
+            
+           }
+       );
+      
+        })
+        fileReader.readAsText(this.file);
+
          },
          Download(){
      
         var i;   
       
  for ( i = 0; i < this.categoriesArray.length; i++) {
-    this.content=this.content+this.categoriesArray[i]+":ON ";
-    this.content+='\n';
+    
+    this.content=this.content+this.categoriesArray[i]+"\r\n";
+    
 
 }
 
     
     var Blobfile=new Blob([this.content],{type:'text/plain;charset:utf-8'});
+    this.content="";
     var link =document.createElement('a');
     link.href = window.URL.createObjectURL(Blobfile);
     link.download ='file.txt';

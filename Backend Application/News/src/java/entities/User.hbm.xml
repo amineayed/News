@@ -14,6 +14,9 @@
         <property name="password" type="string">
             <column name="password" length="250" />
         </property>
+         <property name="file" type="string">
+            <column name="file" length="65535" not-null="false" />
+        </property>
         <property name="mail" type="string" unique="true">
             <column name="mail" length="250" />
         </property>
