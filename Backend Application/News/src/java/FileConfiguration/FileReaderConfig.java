@@ -32,21 +32,25 @@ public class FileReaderConfig {
    public void addElement(Category categ){
     this.categorylist.add(categ);
        }
-   
-   public void populatingCateg() throws FileNotFoundException, IOException{
-       String line;
-   FileReader file=new FileReader(this.filename); 
-   BufferedReader BR=new BufferedReader(file);
-   CategoryDao categdao=new CategoryDao();
-List<Category> categdb=categdao.FindAll();
-categdao.ExitSession();
+ public void populatingCateg() throws FileNotFoundException, IOException{
+    String line;
+    FileReader file=new FileReader(this.filename); 
+    BufferedReader BR=new BufferedReader(file);
+    CategoryDao categdao=new CategoryDao();
+    //ArrayList<Category> categdb = new ArrayList<Category>();//categdao.FindAll();
+    List<Category> categdb = categdao.FindAll();
+    categdao.ExitSession();
+    
    
    while((line=BR.readLine())!=null){
-       
-      if (!categdb.contains(line)){
-  
-           this.categorylist.add(new Category(line.toUpperCase()));
-      }
+       for(int i = 0; i < 12; i++)
+       {
+            if (line.contains(categdb.get(i).getTitle()) && (line.contains("ON") || (line.contains("On") || line.contains("on"))))
+            {
+                System.out.println(categdb.get(i).getTitle());  
+                this.categorylist.add(categdb.get(i));
+            }
+       }
    }
     BR.close(); 
    
