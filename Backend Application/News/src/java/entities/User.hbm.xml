@@ -20,15 +20,15 @@
         <property name="mail" type="string" unique="true">
             <column name="mail" length="250" />
         </property>
-        <set name="articles" table="favoritearticle" inverse="false" lazy="true" fetch="select">
+        <set name="articles" table="favoritearticle" inverse="false"  lazy="false" fetch="select">
             <key>
-                <column name="iduser" not-null="true" unique="true" />
+                <column name="iduser" not-null="true" unique="false" />
             </key>
             <many-to-many entity-name="entities.Article">
-                <column name="id_Article" not-null="true" unique="true" />
+                <column name="id_Article" not-null="true" unique="false" />
             </many-to-many>
         </set>
-        <set name="categories" table="user_preferences" cascade="all" inverse="false" lazy="false" fetch="select">
+        <set name="categories" table="user_preferences"  inverse="false" lazy="false" fetch="select">
             <key>
                 <column name="iduser" not-null="true" />
             </key>

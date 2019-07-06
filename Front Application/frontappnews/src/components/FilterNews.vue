@@ -13,7 +13,7 @@
 </div>
 </template>
 <script>
-import axios from 'axios'
+import axios from "axios"
 export default{
     data(){
       return{
@@ -29,7 +29,7 @@ export default{
                (response)=>{
                   var categories=response.data;
                   categories=categories.substr(1,categories.length-2);
-                  this.categoriesArray=categories.split(" ");
+                  this.categoriesArray=categories.split(".");
                   
                 console.log(this.categoriesArray);
 
@@ -60,13 +60,13 @@ export default{
      
         var i;   
       
- for ( i = 0; i < this.categoriesArray.length; i++) {
+ for ( i = 0; i < this.categoriesArray.length-1; i++) {
     
-    this.content=this.content+this.categoriesArray[i]+"\r\n";
+    this.content=this.content+this.categoriesArray[i]+".\r\n";
     
 
 }
-
+this.content=this.content+this.categoriesArray[this.categoriesArray.length-1];
     
     var Blobfile=new Blob([this.content],{type:'text/plain;charset:utf-8'});
     this.content="";

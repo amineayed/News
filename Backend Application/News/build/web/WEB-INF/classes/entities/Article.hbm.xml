@@ -8,20 +8,20 @@
             <column name="id_Article" />
             <generator class="identity" />
         </id>
-        <many-to-one name="category" class="entities.Category" fetch="select">
+        <many-to-one name="category" class="entities.Category" fetch="select" >
             <column name="category_title" length="250" />
         </many-to-one>
         <property name="title" type="string">
             <column name="Title" length="250" not-null="true" />
         </property>
         <property name="link" type="string">
-            <column name="link" not-null="true" />
+            <column name="link" length="65535" not-null="true" />
         </property>
         <property name="description" type="string">
             <column name="Description" length="65535" not-null="true" />
         </property>
         <property name="image" type="string">
-            <column name="image" not-null="true" />
+            <column name="image" not-null="false" />
         </property>
         <property name="date" type="string">
             <column name="date" length="65535" not-null="true" />

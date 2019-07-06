@@ -55,16 +55,7 @@ private UserDao users;
         
     }
 
-    /**
-     * Retrieves representation of an instance of RestServices.CategoriesService
-     * @return an instance of java.lang.String
-     */
-    @GET
-    @Produces(MediaType.APPLICATION_XML)
-    public String getXml() {
-        //TODO return proper representation object
-        throw new UnsupportedOperationException();
-    }
+    
 
     /**
      * PUT method for updating or creating an instance of CategoriesService

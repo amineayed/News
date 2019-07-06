@@ -24,7 +24,18 @@ public class Article implements java.io.Serializable {
     public Article() {
     }
 
-    public Article(Category category, String title, String link, String description, String image, String date, String source) {
+    public Article(Category category, String title, String description,  String source, String link,String image, String date) {
+        this.category = category;
+        this.title = title;
+        this.link = link;
+        this.description = description;
+        this.image = image;
+        this.date = date;
+        this.source = source;
+    }
+
+    public Article(Integer idArticle, Category category, String title,String description, String source,  String link, String image, String date) {
+        this.idArticle = idArticle;
         this.category = category;
         this.title = title;
         this.link = link;

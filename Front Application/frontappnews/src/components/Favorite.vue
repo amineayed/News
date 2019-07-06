@@ -1,16 +1,18 @@
 <template>
 
-<div    class="backgroundcolor">
-<h1 v-if="message!=''">{{message}}</h1>
+<div    >
+  <br><br>
+<center><h1 v-if="message!=''" style="color:white;">{{message}}</h1></center>
    <div class="leftnewsbox"  v-for="News in TitleAR" :key="News.ID"> 
-      <div @click="RemoveFavorite(News.ID)">
+      <div @click="RemoveFavorite(News)">
               <img src="../assets/img/removebt.png" class="addbt"  />
      </div>
             <img class="Arrow" src="../assets/img/arrow.png" @click="OpenNewTAB(News.Link)" >
               <br>
-                <img v-bind:src="News.Image"
-     
+                 <img v-if="News.Image !='NO_IMAGE'" v-bind:src="News.Image" 
+              
                 class="NewsImage">
+              <img v-else-if="News.Image =='NO_IMAGE'"  src="../assets/img/BBC.png" class="NewsImage">
           
 <p class="News-Title" @click="OpenNewTAB(News.Link)">{{ News.Title }}</p>
               <hr class="articleseperator">
@@ -20,13 +22,13 @@
            <label class="newsdesc"> Source : {{ News.Source }}</label>
           
           </div>
-     
+      
 </div> 
 
 </template>
 <script>
 
-import axios from 'axios'
+import axios from "axios"
 
 export default {
  name:"Favorite",
@@ -36,7 +38,8 @@ export default {
   data() {
     return {
         TitleAR:[],
-      message:''
+      message:'',
+      Component:"Favorite"
     };
   },
   created(){      
@@ -58,9 +61,14 @@ this.message=articles.message;
                  OpenNewTAB(link){
                   var win = window.open(link,'_blank')
                    win.focus();
-                },RemoveFavorite(ArticleId){
-                   axios.get("http://localhost:8080/News/RemoveFavoriteArticle/"+sessionStorage.getItem("user_ID")+"/"+ArticleId);
+                },RemoveFavorite(Article){
+                   axios.get("http://localhost:8080/News/RemoveFavoriteArticle/"+sessionStorage.getItem("user_ID")+"/"+Article.ID);
+                  console.log(this.TitleAR.indexOf(Article));
+                  this.TitleAR.splice(this.TitleAR.indexOf(Article),1);
                   
+                  if(this.TitleAR.length==0){
+                    this.message="No Favorite Articles !";
+                  }
                }
           
              }

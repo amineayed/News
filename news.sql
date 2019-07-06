@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  sam. 22 juin 2019 à 13:51
+-- Généré le :  mar. 02 juil. 2019 à 10:37
 -- Version du serveur :  10.1.38-MariaDB
 -- Version de PHP :  7.3.4
 
@@ -1087,13 +1087,6 @@ CREATE TABLE `favoritearticle` (
   `id_Article` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Déchargement des données de la table `favoritearticle`
---
-
-INSERT INTO `favoritearticle` (`iduser`, `id_Article`) VALUES
-(1, 2);
-
 -- --------------------------------------------------------
 
 --
@@ -1104,20 +1097,21 @@ CREATE TABLE `user` (
   `iduser` int(11) NOT NULL,
   `login` varchar(250) DEFAULT NULL,
   `password` varchar(250) DEFAULT NULL,
-  `mail` varchar(250) DEFAULT NULL
+  `mail` varchar(250) DEFAULT NULL,
+  `file` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `user`
 --
 
-INSERT INTO `user` (`iduser`, `login`, `password`, `mail`) VALUES
-(1, 'login', 'password', 'login.password@gmail.com'),
-(2, 'amin', 'ayed', 'amin.ayed@gmail.com'),
-(3, 'amine', 'ayede', 'am.ay@gm.cpm'),
-(4, 'alex', 'ff', 'al.ff@gmail.com'),
-(5, 'af', 'ff', 'al.ff@gmail.com'),
-(6, 'zz', 'zz', 'zz.zz@zz.zz');
+INSERT INTO `user` (`iduser`, `login`, `password`, `mail`, `file`) VALUES
+(1, 'login', 'password', 'login.password@gmail.com', 'AFRICA:OFF.AMERICAS:OFF.ASIA:OFF.BUSINESS:OFF.ENTERTAINMENT:OFF.EUROPE:OFF.MIDDLE_EAST:OFF.SCIENCE:OFF.SPORT:ON.TECHNOLOGY:OFF.TOP_STORIES:OFF.WORLD:OFF.'),
+(2, 'amin', 'ayed', 'amin.ayed@gmail.com', NULL),
+(3, 'amine', 'ayede', 'am.ay@gm.cpm', NULL),
+(4, 'alex', 'ff', 'al.ff@gmail.co', NULL),
+(5, 'af', 'ff', 'al.ff@gmail.com', NULL),
+(6, 'zz', 'zz', 'zz.zz@zz.zz', NULL);
 
 -- --------------------------------------------------------
 
@@ -1135,9 +1129,7 @@ CREATE TABLE `user_preferences` (
 --
 
 INSERT INTO `user_preferences` (`iduser`, `title`) VALUES
-(1, 'AFRICA'),
-(1, 'AMERICAS'),
-(1, 'ASIA');
+(1, 'SPORT');
 
 -- --------------------------------------------------------
 
@@ -1173,14 +1165,16 @@ ALTER TABLE `category`
 --
 ALTER TABLE `favoritearticle`
   ADD PRIMARY KEY (`iduser`,`id_Article`),
-  ADD UNIQUE KEY `id_Article` (`id_Article`) USING BTREE,
-  ADD UNIQUE KEY `iduser` (`iduser`) USING BTREE;
+  ADD KEY `id_Article` (`id_Article`) USING BTREE,
+  ADD KEY `iduser` (`iduser`) USING BTREE;
 
 --
 -- Index pour la table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`iduser`);
+  ADD PRIMARY KEY (`iduser`),
+  ADD UNIQUE KEY `mail` (`mail`),
+  ADD UNIQUE KEY `login` (`login`);
 
 --
 -- Index pour la table `user_preferences`

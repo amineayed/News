@@ -1,6 +1,4 @@
 package Adapter;
-
-
 import entities.Article;
 import entities.Category;
 import org.w3c.dom.Document;
@@ -92,7 +90,7 @@ public class RSSAdapter
         articles.addAll(CNNAdapter("http://rss.cnn.com/rss/edition_golf.rss", "sport"));
         articles.addAll(CNNAdapter("http://rss.cnn.com/rss/edition_motorsport.rss", "sport"));
         articles.addAll(CNNAdapter("http://rss.cnn.com/rss/edition_tennis.rss", "sport"));
-        articles.addAll(ESPNAdapter("http://www.espn.com/espn/rss/", "sport"));
+//        articles.addAll(ESPNAdapter("http://www.espn.com/espn/rss/", "sport"));
         articles.addAll(foxAdapter("https://api.foxsports.com/v1/rss?partnerKey=zBaFxRyGKCfxBagJG9b8pqLyndmvo7UU", "sport"));
         articles.addAll(foxAdapter("https://api.foxsports.com/v1/rss?partnerKey=zBaFxRyGKCfxBagJG9b8pqLyndmvo7UU&tag=mlb", "sport"));
         articles.addAll(foxAdapter("https://api.foxsports.com/v1/rss?partnerKey=zBaFxRyGKCfxBagJG9b8pqLyndmvo7UU&tag=nfl", "sport"));
@@ -255,16 +253,28 @@ public class RSSAdapter
 
         for(int i = 0; i < dateList.size(); i++)
         {
+            if(imageList.isEmpty()){
             articles.add(new Article(
-                   
+                    
                     new Category(category),
                     titleList.get(i),
                     descList.get(i),
                     "BBC",
                     linkList.get(i),
-                    imageList.get(i),
+                   "NO_IMAGE",
                     dateList.get(i)
-            ));
+            ));}else{
+           
+                       articles.add(new Article(
+                    
+                    new Category(category),
+                    titleList.get(i),
+                    descList.get(i),
+                    "BBC",
+                    linkList.get(i),
+                   imageList.get(i),
+                               dateList.get(i)
+            ));}
         }
 
         return articles;
@@ -300,7 +310,7 @@ public class RSSAdapter
         for(int i = 0; i < dateList.size(); i++)
         {
             articles.add(new Article(
-                  
+                    
                     new Category(category),
                     titleList.get(i),
                     descList.get(i),
@@ -591,7 +601,7 @@ public class RSSAdapter
                 articleMap.get(i)[2] = articleMap.get(i)[2].substring(0, descErrorIndex);*/
             //Add article
             articles.add(new Article(
-                    
+                   
                     new Category(category),
                     articleMap.get(i)[1],
                     articleMap.get(i)[2],
@@ -712,7 +722,7 @@ public class RSSAdapter
                 articleMap.get(i)[2] = articleMap.get(i)[2].substring(0, descErrorIndex);*/
             //Add article
             articles.add(new Article(
-             
+                   
                     new Category(category),
                     articleMap.get(i)[1].trim(),
                     articleMap.get(i)[2].trim(),
@@ -843,7 +853,7 @@ public class RSSAdapter
         for(int i = 0; i < articles.size(); i++)
         {
             if(articleIds.contains(articles.get(i).getIdArticle()))
-                articles.remove(i--);
+                articles.remove(articles.get(i));
             else
                 articleIds.add(articles.get(i).getIdArticle());
         }

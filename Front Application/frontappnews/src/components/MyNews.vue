@@ -9,9 +9,10 @@
      </div>
             <img class="Arrow" src="../assets/img/arrow.png" @click="OpenNewTAB(News.Link)" >
               <br>
-                <img v-bind:src="News.Image"
-     
+               <img v-if="News.Image !='NO_IMAGE'" v-bind:src="News.Image" 
+              
                 class="NewsImage">
+              <img v-else-if="News.Image =='NO_IMAGE'"  src="../assets/img/BBC.png" class="NewsImage">
           
               <p class="News-Title" @click="OpenNewTAB(News.Link)">{{ News.Title }}</p>
               <hr>
@@ -45,7 +46,7 @@ export default {
      axios.get("http://localhost:8080/News/GetCategoriesedArticles/"+sessionStorage.getItem("user_ID")).then((response)=>{
               var articles=response.data;
               if(articles.message==null){
-              articles.forEach(element => {    
+              articles.forEach(element => { 
                this.TitleAR.push(element);
                 });
      }else{

@@ -4,7 +4,9 @@
  
  
   <div class="menu">
-      <img src="./assets/img/logoNews.png" class="logo" />
+  
+      <img src="./assets/img/logoNews.png" class="logo"/>
+ 
            <br><br>
            <label class="menulinks" @click="Surfing('Article')">All News</label>
        <label class="menulinks" @click="Surfing('FilterNews')">Configure My News</label>
@@ -18,6 +20,7 @@
 </template>
 
 <script>
+import axios from "axios"
 
 import MyNews from "./components/MyNews"
 import FilterNews from "./components/FilterNews"
@@ -42,6 +45,7 @@ import Article from "./components/Article"
     
 },
 methods:{
+  
   Surfing(element){
       this.Component=element;
   },Logout(){

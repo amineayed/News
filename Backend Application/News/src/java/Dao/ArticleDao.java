@@ -57,12 +57,11 @@ public class ArticleDao {
         session.delete(f);
         session.getTransaction().commit();
     }
-    
-    
-     public void add_Favorite_Article(int id_user,int id_article){
-        Transaction t= session.beginTransaction();
+
+    public void add_Favorite_Article(int id_user, int id_article) {
+        Transaction t = session.beginTransaction();
         session.createQuery("Insert into favoritearticle(iduser,id_Article) select iduser,id_Article from user,article where iduser=:iduser and id_Article=:id_Article )").setParameter("iduser", id_user).setParameter("id_Article", id_article).executeUpdate();
-     t.commit();
+        t.commit();
     }
 
     public List<Article> FindAll() {
@@ -74,21 +73,32 @@ public class ArticleDao {
         session.close();
     }
 
-    public static void AddArticleAdapter(ArrayList<Article> l) {
+    public void AddArticleAdapter(ArrayList<Article> ArticlesList) {
         ArticleDao ad = new ArticleDao();
-        for (int i = 0; i < l.size(); i++) {
+        for (int i=0;i< ArticlesList.size();i++) {
 
-            ad.AddArticle(l.get(i));
+            ad.AddArticle(ArticlesList.get(i));
+            ad.ExitSession();
+            ad = new ArticleDao();
         }
 
-        ad.ExitSession();
+        
 
     }
 
-    public static void CleanArticleTable() {
-        ArticleDao ad = new ArticleDao();
-        ad.session.createSQLQuery("TRUNCATE TABLE article ").executeUpdate();
+    public  void CleanArticleTable() {
+        
+        session.createSQLQuery("SET FOREIGN_KEY_CHECKS = 0;").executeUpdate();
+        session.createSQLQuery("TRUNCATE table article;").executeUpdate();
+        session.createSQLQuery("SET FOREIGN_KEY_CHECKS = 1; ").executeUpdate();
 
+    }
+
+    public  void CleanFavoriteArticleTable() {
+       
+        session.createSQLQuery("TRUNCATE table favoritearticle;").executeUpdate();
+        
+        
     }
 
     public List<Article> FindbyCategory(Category category) {
@@ -114,7 +124,6 @@ public class ArticleDao {
 
     }
 
-   
     public String fromListToJson(List<Article> articlesList) {
 
         String json = "";
@@ -131,5 +140,4 @@ public class ArticleDao {
         return json;
     }
 
-    
 }

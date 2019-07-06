@@ -1,22 +1,25 @@
 <template>
 
-<div    class="backgroundcolor">
+<div    style="display: table-cell;" class="backgroundcolor">
 
    <div class="leftnewsbox"  v-for="News in TitleAR" :key="News.ID"> 
      <div @click="addFavorite(News.ID)">
               <img src="../assets/img/addbt.png" class="addbt"  />
      </div>
-            <img class="Arrow" src="../assets/img/arrow.png" @click="OpenNewTAB(News.Link)" >
-              <br>
-                <img v-bind:src="News.Image"
      
+            <img class="Arrow" src="../assets/img/arrow.png" @click="OpenNewTAB(News.Link)" >
+              <br >
+                <img v-if="News.Image !='NO_IMAGE'" v-bind:src="News.Image" 
+              
                 class="NewsImage">
-          
+              <img v-else-if="News.Image =='NO_IMAGE'"  src="../assets/img/BBC.png" class="NewsImage">
+         
 <p class="News-Title" @click="OpenNewTAB(News.Link)">{{ News.Title }}</p>
               <hr class="articleseperator">
               <p class="newsdesc">{{ News.Description || "No Description" }} 
                
                  </p>
+               
            <label class="newsdesc"> Source : {{ News.Source }}</label>
           
           </div>
@@ -26,7 +29,7 @@
 </template>
 <script>
 
-import axios from 'axios'
+import axios from "axios"
 
 export default {
  name:"Article",
@@ -40,14 +43,17 @@ export default {
     };
   },
   created(){      
+    
      axios.get("http://localhost:8080/News/articles/all").then((response)=>{
               var articles=response.data;
-              articles.forEach(element => {    
+              articles.forEach(element => {  
+                
                this.TitleAR.push(element);
                 });
                 
         
-      });   
+      });
+         
              },
              methods:{
             
